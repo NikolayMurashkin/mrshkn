@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import { Link } from '@/i18n/navigation';
+import { DesignSection } from '@/designs/registry';
+import { getDesign } from '@/designs/server';
 import { THANKS_HREF } from '@/lib/brief/consts';
-import styles from './page.module.scss';
 
 type ThanksPageProps = {
   params: Promise<{ locale: string }>;
@@ -24,23 +24,13 @@ const ThanksPage = async ({ params }: ThanksPageProps) => {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: 'briefThanks' });
+  const design = await getDesign();
 
   return (
-    <main
-      className={styles.thanks}
-      data-testid="brief-thanks"
-    >
-      <h1 className={styles.title}>{t('title')}</h1>
-      <p className={styles.text}>{t('text')}</p>
-      <p className={styles.note}>{t('note')}</p>
-      <Link
-        className={styles.back}
-        href="/"
-      >
-        {t('back')}
-      </Link>
-    </main>
+    <DesignSection
+      design={design}
+      section="briefThanks"
+    />
   );
 };
 

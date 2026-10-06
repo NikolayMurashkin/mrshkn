@@ -2,7 +2,17 @@ import type { DesignName, Theme } from './types';
 
 export const DESIGN_NAMES = ['kinetic', 'terminal', 'pop', 'swiss', 'editorial'] as const;
 
-export const SECTION_NAMES = ['header', 'hero', 'pricing', 'works', 'process', 'case', 'footer'] as const;
+export const SECTION_NAMES = [
+  'header',
+  'hero',
+  'pricing',
+  'works',
+  'process',
+  'case',
+  'footer',
+  'brief',
+  'briefThanks',
+] as const;
 
 export const DEFAULT_DESIGN = 'kinetic' satisfies (typeof DESIGN_NAMES)[number];
 

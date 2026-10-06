@@ -21,6 +21,7 @@ export const LocaleSwitcher = ({ className, itemClassName, activeItemClassName }
           key={locale}
           href={`/${locale}${pathname === '/' ? '' : pathname}`}
           data-testid={`locale-${locale}`}
+          aria-current={locale === activeLocale ? 'true' : undefined}
           className={locale === activeLocale ? activeItemClassName : itemClassName}
         >
           {locale.toUpperCase()}

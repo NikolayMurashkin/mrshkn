@@ -1,37 +1,20 @@
+@use './breakpoints' as bp;
+
 .pricing {
+  --plan-bleed: min(var(--space-24), var(--gutter));
+  --price-column: 216px;
+
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 72px clamp(20px, 4vw, 56px);
-}
-
-.head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.heading {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 20px);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.note {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
+  gap: var(--space-56);
+  padding: var(--space-120) var(--gutter);
 }
 
 .plans {
   margin: 0;
   padding: 0;
   list-style: none;
+  border-top: var(--border-width) solid var(--ink);
 }
 
 .plan {
@@ -40,20 +23,44 @@
 
 .planLink {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) 200px 220px 56px;
-  gap: 24px;
+  grid-template-columns: 64px minmax(0, 1fr) 150px var(--price-column) 48px;
   align-items: center;
-  padding: 30px 0;
+  gap: var(--space-24);
+  margin: 0 calc(-1 * var(--plan-bleed));
+  padding: 30px var(--plan-bleed);
+  border-radius: var(--radius-surface);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
   color: var(--ink);
-}
+  transition:
+    background-size var(--duration-base) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 
-.planLink:hover {
-  color: var(--accent-ink);
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 100%;
+    color: var(--accent-contrast);
+
+    .summary,
+    .term,
+    .index {
+      color: var(--accent-contrast);
+    }
+
+    .arrow {
+      transform: rotate(45deg);
+    }
+  }
 }
 
 .index {
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .body {
@@ -66,8 +73,8 @@
 .name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(20px, 2.4vw, 30px);
-  line-height: 1.2;
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.15;
   overflow-wrap: anywhere;
   min-width: 0;
 }
@@ -81,62 +88,80 @@
 }
 
 .term {
-  color: var(--muted);
   font-size: 15px;
+  color: var(--muted);
 }
 
 .price {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(18px, 1.8vw, 22px);
+  font-size: 24px;
   text-align: right;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
 .arrow {
-  justify-self: end;
-}
-
-.miniApp {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 28px clamp(20px, 3vw, 36px);
-  border: var(--border-width) solid var(--accent);
-  border-radius: var(--radius-surface);
-  background: var(--surface);
+  justify-self: end;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
-.miniAppTitle {
+.callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-24);
+  padding: var(--space-28) 32px;
+  border-radius: var(--radius-surface);
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.calloutTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(18px, 2vw, 24px);
-  color: var(--accent-ink);
+  font-weight: 900;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
-.miniAppText {
+.calloutText {
   margin: 0;
-  max-width: 720px;
-  color: var(--muted);
+  max-width: 640px;
   line-height: 1.5;
   overflow-wrap: anywhere;
   min-width: 0;
 }
 
-.included,
-.optionsBlock,
-.extrasBlock {
+.block {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-24);
 }
 
 .blockHead {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-24);
+  padding-top: 18px;
+  border-top: var(--border-width) solid var(--ink);
+}
+
+.blockTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .blockNote {
@@ -153,93 +178,73 @@
   gap: 20px;
 }
 
-.groupItems {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(7, auto);
-  grid-auto-flow: column;
-  column-gap: 56px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.extras {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.blockTitle {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .group {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 24px;
+  gap: var(--space-16);
+  padding: var(--space-24);
   min-width: 0;
-  background: var(--surface);
   border: var(--border-width) solid var(--line);
   border-radius: var(--radius-surface);
+  background: var(--surface);
 }
 
 .groupTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 13px;
   font-weight: 700;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-ink);
-}
-
-.basic {
-  position: relative;
-  padding-left: 26px;
-  line-height: 1.45;
   overflow-wrap: anywhere;
   min-width: 0;
 }
 
-.basic::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--accent-ink);
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: var(--space-28);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+    min-width: 0;
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-weight: 600;
+      color: var(--accent-ink);
+    }
+  }
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-56);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  gap: 4px 24px;
+  gap: var(--space-4) var(--space-24);
   padding: 14px 0;
   border-bottom: var(--border-width) solid var(--line);
 }
 
 .optionName {
-  grid-column: 1;
-  grid-row: 1;
-  font-size: 16px;
   font-weight: 500;
   line-height: 1.35;
   overflow-wrap: anywhere;
@@ -248,7 +253,6 @@
 
 .optionNote {
   grid-column: 1;
-  grid-row: 2;
   font-size: 13px;
   line-height: 1.4;
   color: var(--muted);
@@ -260,8 +264,8 @@
   grid-column: 2;
   grid-row: 1;
   font-family: var(--font-display);
-  font-size: 15px;
   font-weight: 600;
+  font-size: 15px;
   text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -269,7 +273,6 @@
 
 .optionMonthly {
   grid-column: 2;
-  grid-row: 2;
   font-size: 13px;
   text-align: right;
   white-space: nowrap;
@@ -277,65 +280,76 @@
   font-variant-numeric: tabular-nums;
 }
 
+.extras {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .extra {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 24px 28px;
+  gap: var(--space-12);
+  padding: var(--space-28);
   min-width: 0;
-  background: var(--surface);
   border: var(--border-width) solid var(--line);
   border-radius: var(--radius-surface);
-}
-
-.extraHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 20px;
+  background: var(--surface);
 }
 
 .extraName {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 19px;
   font-weight: 700;
-}
-
-.extraPrice {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 700;
-  white-space: nowrap;
-  color: var(--accent-ink);
-  font-variant-numeric: tabular-nums;
+  font-size: 22px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .extraSummary {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--muted);
   overflow-wrap: anywhere;
   min-width: 0;
 }
 
-@media (max-width: 900px) {
-  .groups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.extraPrice {
+  margin-top: auto;
+  padding-top: var(--space-16);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--accent-ink);
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planLink,
+  .arrow {
+    transition: none;
   }
 
-  .options,
-  .extras {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto;
-    grid-auto-flow: row;
+  .planLink:hover .arrow,
+  .planLink:focus-visible .arrow {
+    transform: none;
+  }
+}
+
+@media (max-width: bp.$tablet) {
+  .pricing {
+    padding-block: var(--space-72);
   }
 
   .planLink {
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 8px 16px;
+    gap: var(--space-8) var(--space-16);
     align-items: start;
   }
 
@@ -343,18 +357,9 @@
     display: none;
   }
 
-  .body {
-    grid-column: 1;
-  }
-
-  .term {
-    grid-column: 1;
-  }
-
   .price {
     grid-column: 2;
     grid-row: 1;
-    text-align: right;
   }
 
   .arrow {
@@ -362,48 +367,40 @@
     grid-row: 2;
     align-self: end;
   }
+
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .extras {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-@media (max-width: 600px) {
-  .groups {
+@media (max-width: bp.$mobile-wide) {
+  .options,
+  .extras {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .option {
+  .callout {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2px;
   }
+}
 
-  .optionPrice,
-  .optionMonthly {
-    grid-column: 1;
-    text-align: left;
-  }
-
-  .optionPrice {
-    grid-row: 2;
-  }
-
-  .optionMonthly {
-    grid-row: 3;
-  }
-
-  .optionNote {
-    grid-row: 4;
-  }
-
+@media (max-width: bp.$mobile) {
   .planLink {
+    --plan-bleed: var(--space-12);
+
     grid-template-columns: minmax(0, 1fr) 28px;
-    gap: 10px 16px;
+    padding-block: var(--space-24);
   }
 
   .body {
-    grid-column: 1;
     grid-row: 1;
   }
 
   .term {
-    grid-column: 1;
     grid-row: 2;
   }
 
@@ -417,5 +414,20 @@
     grid-column: 2;
     grid-row: 1;
     align-self: start;
+  }
+
+  .groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .option {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .optionPrice,
+  .optionMonthly {
+    grid-column: 1;
+    grid-row: auto;
+    text-align: left;
   }
 }

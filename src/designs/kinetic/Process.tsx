@@ -1,9 +1,13 @@
 import { useTranslations } from 'next-intl';
 import { PROCESS_STEPS, PROMISES } from '@/content/process';
+import { KINETIC_AXIS, KINETIC_KEY_DAYS } from './consts';
+import { SectionHead } from './SectionHead';
 import styles from './Process.module.scss';
 
 export const KineticProcess = () => {
   const t = useTranslations('process');
+  const nav = useTranslations('nav');
+  const hero = useTranslations('hero');
 
   return (
     <section
@@ -12,34 +16,48 @@ export const KineticProcess = () => {
       id="process"
       aria-labelledby="process-heading"
     >
-      <div className={styles.promisesBlock}>
-        <div className={styles.promisesHead}>
-          <h2
-            className={styles.heading}
-            id="process-heading"
+      <SectionHead
+        id="process-heading"
+        kicker={nav('process')}
+        title={t('heading')}
+        note={t('contractNote')}
+      />
+
+      <ul
+        className={styles.promises}
+        data-testid="promises"
+      >
+        {PROMISES.map((promise, index) => (
+          <li
+            className={index === 0 ? `${styles.promise} ${styles.lead}` : styles.promise}
+            key={promise}
           >
-            {t('promisesHeading')}
-          </h2>
-          <p className={styles.note}>{t('contractNote')}</p>
-        </div>
-        <ul
-          className={styles.promises}
-          data-testid="promises"
-        >
-          {PROMISES.map((promise) => (
-            <li
-              className={styles.promise}
-              key={promise}
-            >
-              <span className={styles.kicker}>{t(`promises.${promise}.kicker`)}</span>
-              <span className={styles.value}>{t(`promises.${promise}.value`)}</span>
-              <span className={styles.detail}>{t(`promises.${promise}.detail`)}</span>
-            </li>
+            <span className={styles.kicker}>{t(`promises.${promise}.kicker`)}</span>
+            <span className={styles.value}>{t(`promises.${promise}.value`)}</span>
+            <span className={styles.detail}>{t(`promises.${promise}.detail`)}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div
+        className={styles.axis}
+        aria-hidden="true"
+      >
+        <div className={styles.ticks}>
+          {KINETIC_AXIS.map((day) => (
+            <span
+              className={KINETIC_KEY_DAYS.includes(day) ? `${styles.tick} ${styles.tickKey}` : styles.tick}
+              key={day}
+            />
           ))}
-        </ul>
+        </div>
+        <div className={styles.labels}>
+          {KINETIC_AXIS.map((day) => (
+            <span key={day}>{day}</span>
+          ))}
+        </div>
       </div>
 
-      <h3 className={styles.stepsHeading}>{t('heading')}</h3>
       <ol
         className={styles.steps}
         data-testid="steps"
@@ -50,7 +68,10 @@ export const KineticProcess = () => {
             data-day={step.day}
             key={step.id}
           >
-            <span className={styles.day}>{step.day}</span>
+            <span className={styles.day}>
+              <span className={styles.num}>{step.day}</span>
+              <span className={styles.unit}>{hero('kinetic.dayUnit')}</span>
+            </span>
             <span className={styles.stepTitle}>{t(`steps.${step.id}.title`)}</span>
             <span className={styles.stepText}>{t(`steps.${step.id}.text`)}</span>
           </li>

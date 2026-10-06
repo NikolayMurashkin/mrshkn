@@ -7,6 +7,8 @@ import { KineticCase } from './Case';
 import { KineticFooter } from './Footer';
 import { KineticHeader } from './Header';
 import { KineticHero } from './Hero';
+import { KineticBrief } from './KineticBrief';
+import { KineticBriefThanks } from './KineticBriefThanks';
 import { KineticPricing } from './Pricing';
 import { KineticProcess } from './Process';
 import { KineticWorks } from './Works';
@@ -19,6 +21,8 @@ const COMPONENTS: DesignComponents = {
   process: KineticProcess,
   case: KineticCase,
   footer: KineticFooter,
+  brief: KineticBrief,
+  briefThanks: KineticBriefThanks,
 };
 
 export const KineticSection = (props: SectionProps) => renderSection(COMPONENTS, props);

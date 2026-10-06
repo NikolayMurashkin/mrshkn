@@ -9,6 +9,8 @@ export const renderSection = (components: DesignComponents, props: SectionProps)
       return createElement(components.works, { cases: props.cases });
     case 'case':
       return createElement(components.case, { caseItem: props.caseItem });
+    case 'brief':
+      return createElement(components.brief, { design: props.design, plan: props.plan });
     default:
       return createElement(components[props.section]);
   }

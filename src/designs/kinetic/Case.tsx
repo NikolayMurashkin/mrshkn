@@ -4,6 +4,7 @@ import { CASE_COVER_SIZES, CASE_SHOT_SIZES } from '@/components/consts';
 import { splitParagraphs } from '@/content/work';
 import { DESIGN_LABELS } from '../consts';
 import type { CaseProps } from '../types';
+import { ArrowUpRightIcon } from './icons';
 import styles from './Case.module.scss';
 
 export const KineticCase = ({ caseItem }: CaseProps) => {
@@ -29,9 +30,9 @@ export const KineticCase = ({ caseItem }: CaseProps) => {
       </a>
 
       <header className={styles.head}>
-        <span className={styles.kind}>{t(`kind.${kind}`)}</span>
+        <span className={styles.tag}>{t(`kind.${kind}`)}</span>
         <h1 className={styles.title}>{title}</h1>
-        <p className={styles.meta}>
+        <p className={styles.lead}>
           {niches(niche)} · {t('design', { design: DESIGN_LABELS[design] })}
         </p>
         {demoUrl ? (
@@ -42,16 +43,19 @@ export const KineticCase = ({ caseItem }: CaseProps) => {
             rel="noopener noreferrer"
           >
             {t('demoLink')}
+            <ArrowUpRightIcon />
           </a>
         ) : null}
       </header>
 
-      <CaseImage
-        className={styles.cover}
-        image={cover}
-        sizes={CASE_COVER_SIZES}
-        priority
-      />
+      <span className={styles.cover}>
+        <CaseImage
+          className={styles.image}
+          image={cover}
+          sizes={CASE_COVER_SIZES}
+          priority
+        />
+      </span>
 
       {texts.map(({ id, paragraphs }) => (
         <section
@@ -66,14 +70,9 @@ export const KineticCase = ({ caseItem }: CaseProps) => {
           >
             {t(id)}
           </h2>
-          <div className={styles.text}>
+          <div className={styles.prose}>
             {paragraphs.map((paragraph, index) => (
-              <p
-                className={styles.paragraph}
-                key={index}
-              >
-                {paragraph}
-              </p>
+              <p key={index}>{paragraph}</p>
             ))}
           </div>
         </section>

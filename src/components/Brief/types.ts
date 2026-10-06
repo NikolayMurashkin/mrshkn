@@ -1,4 +1,6 @@
-import type { BriefChoice } from '@/lib/brief/types';
+import type { ChangeEvent } from 'react';
+import type { DesignName } from '@/designs/types';
+import type { BriefChoice, BriefStep } from '@/lib/brief/types';
 
 /** Ответы квиза в состоянии компонента: до отправки любое поле может быть пустым. */
 export type BriefAnswers = Record<BriefChoice, string> & {
@@ -9,7 +11,7 @@ export type BriefAnswers = Record<BriefChoice, string> & {
 
 export type BriefProps = {
   /** Направление из cookie: им предвыбран шаг стиля, чтобы человек не выбирал заново уже увиденное. */
-  design: string;
+  design: DesignName;
   /** Тариф из `?plan=` на кнопке прайса: предвыбирает первый шаг. */
   plan: string | null;
 };
@@ -30,4 +32,27 @@ export type DesignChoiceProps = {
 
 export type DesignThumbProps = {
   design: string;
+};
+
+export type BriefStatus = 'idle' | 'sending' | 'error';
+
+/** Состояние и действия квиза: общий `Brief` и квиз направления только рисуют на этом хуке. */
+export type UseBrief = {
+  step: number;
+  current: BriefStep;
+  isLast: boolean;
+  filled: boolean;
+  answers: BriefAnswers;
+  consent: boolean;
+  trap: string;
+  status: BriefStatus;
+  pick: (field: BriefChoice, value: string) => void;
+  write: (
+    field: 'name' | 'contact' | 'comment',
+  ) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  back: () => void;
+  next: () => void;
+  send: () => Promise<void>;
+  setConsent: (value: boolean) => void;
+  setTrap: (value: string) => void;
 };

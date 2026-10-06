@@ -2,6 +2,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { planHref } from '@/content/format';
 import { PRICING_BASIC_GROUPS, PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
 import { usePriceText } from '@/content/use-price';
+import { ArrowUpRightIcon } from './icons';
+import { SectionHead } from './SectionHead';
 import styles from './Pricing.module.scss';
 
 export const KineticPricing = () => {
@@ -16,15 +18,12 @@ export const KineticPricing = () => {
       data-testid="pricing"
       aria-labelledby="pricing-heading"
     >
-      <div className={styles.head}>
-        <h2
-          className={styles.heading}
-          id="pricing-heading"
-        >
-          {t('heading')}
-        </h2>
-        <p className={styles.note}>{t('note')}</p>
-      </div>
+      <SectionHead
+        id="pricing-heading"
+        kicker={t('kineticKicker')}
+        title={t('heading')}
+        note={t('note')}
+      />
 
       <ul
         className={styles.plans}
@@ -48,34 +47,26 @@ export const KineticPricing = () => {
               </span>
               <span className={styles.term}>{t(`plans.${plan.id}.term`)}</span>
               <span className={styles.price}>{price.plan(plan)}</span>
-              <svg
-                className={styles.arrow}
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M7 17L17 7M8 7h9v9" />
-              </svg>
+              <span className={styles.arrow}>
+                <ArrowUpRightIcon
+                  size={28}
+                  strokeWidth={2}
+                />
+              </span>
             </a>
           </li>
         ))}
       </ul>
 
       <div
-        className={styles.miniApp}
+        className={styles.callout}
         data-testid="mini-app-note"
       >
-        <p className={styles.miniAppTitle}>{t('miniAppNote.title')}</p>
-        <p className={styles.miniAppText}>{t('miniAppNote.text')}</p>
+        <p className={styles.calloutTitle}>{t('miniAppNote.title')}</p>
+        <p className={styles.calloutText}>{t('miniAppNote.text')}</p>
       </div>
 
-      <div className={styles.included}>
+      <div className={styles.block}>
         <div className={styles.blockHead}>
           <h3 className={styles.blockTitle}>{t('basicsHeading')}</h3>
           <p className={styles.blockNote}>{t('basicsNote')}</p>
@@ -91,14 +82,9 @@ export const KineticPricing = () => {
               key={group.id}
             >
               <h4 className={styles.groupTitle}>{t(`basicsGroups.${group.id}`)}</h4>
-              <ul className={styles.groupItems}>
+              <ul className={styles.checks}>
                 {group.items.map((item) => (
-                  <li
-                    className={styles.basic}
-                    key={item}
-                  >
-                    {t(`basics.${item}`)}
-                  </li>
+                  <li key={item}>{t(`basics.${item}`)}</li>
                 ))}
               </ul>
             </div>
@@ -106,7 +92,7 @@ export const KineticPricing = () => {
         </div>
       </div>
 
-      <div className={styles.optionsBlock}>
+      <div className={styles.block}>
         <div className={styles.blockHead}>
           <h3 className={styles.blockTitle}>{t('optionsHeading')}</h3>
           <p className={styles.blockNote}>{t('optionsNote')}</p>
@@ -138,7 +124,7 @@ export const KineticPricing = () => {
         </ul>
       </div>
 
-      <div className={styles.extrasBlock}>
+      <div className={styles.block}>
         <div className={styles.blockHead}>
           <h3 className={styles.blockTitle}>{t('extrasHeading')}</h3>
           <p className={styles.blockNote}>{t('extrasNote')}</p>
@@ -152,11 +138,9 @@ export const KineticPricing = () => {
               className={styles.extra}
               key={extra.id}
             >
-              <div className={styles.extraHead}>
-                <h4 className={styles.extraName}>{t(`extras.${extra.id}.name`)}</h4>
-                <span className={styles.extraPrice}>{price.extra(extra)}</span>
-              </div>
+              <h4 className={styles.extraName}>{t(`extras.${extra.id}.name`)}</h4>
               <p className={styles.extraSummary}>{t(`extras.${extra.id}.summary`)}</p>
+              <span className={styles.extraPrice}>{price.extra(extra)}</span>
             </li>
           ))}
         </ul>

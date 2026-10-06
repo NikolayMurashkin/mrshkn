@@ -27,11 +27,13 @@
   "hero": {
     "subtitle": "Fixed price, no templates, support included.",
     "kinetic": {
-      "title": "Custom-coded websites<br></br><accent>in 14 days</accent>",
+      "title": "<line>Custom-coded websites</line><line><accent>in 14 days</accent></line>",
       "lead": "Websites and Telegram apps for business — from brief to launch in two weeks.",
       "primaryCta": "Get a quote",
       "secondaryCta": "How we work",
       "badge": "LIGHTHOUSE 90+ · 14 DAYS · 30-DAY WARRANTY · ",
+      "tapeCode": "Code",
+      "dayUnit": "day",
       "ticker": {
         "landing": "Landing pages",
         "miniApps": "Telegram Mini Apps",
@@ -94,6 +96,7 @@
     }
   },
   "pricing": {
+    "kineticKicker": "Plans",
     "heading": "Services and pricing",
     "note": "The price in the contract does not change",
     "sectionMark": "02 — Services",
@@ -246,6 +249,7 @@
   "work": {
     "heading": "Work",
     "mark": "Selected work",
+    "kineticKicker": "Work",
     "note": "Measurable technical results only",
     "kind": {
       "demo": "Studio demo project",
@@ -337,6 +341,7 @@
     "next": "Next",
     "submit": "Send the request",
     "sending": "Sending",
+    "fieldError": "Fill in this field to continue",
     "error": "The request did not go through. Try again, or write to hello@mrshkn.com.",
     "consent": "I agree to the processing of my personal data",
     "honeypot": "Leave this field empty",

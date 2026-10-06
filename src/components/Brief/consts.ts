@@ -1,4 +1,5 @@
 import type { BriefStep } from '@/lib/brief/types';
+import type { BriefAnswers } from './types';
 
 /** Какие ответы обязаны быть заполнены, чтобы шаг пустил дальше. */
 export const BRIEF_STEP_REQUIRED: Record<BriefStep, readonly string[]> = {
@@ -14,3 +15,14 @@ export const BRIEF_DESIGN_THUMBS = ['kinetic', 'terminal', 'pop', 'swiss', 'edit
 
 /** Что рисует миниатюра направления: полоски заголовка, текста и кнопка в его токенах. */
 export const THUMB_LINES = [72, 100, 54] as const;
+
+export const BRIEF_EMPTY_ANSWERS: BriefAnswers = {
+  product: '',
+  niche: '',
+  design: '',
+  timing: '',
+  budget: '',
+  name: '',
+  contact: '',
+  comment: '',
+};

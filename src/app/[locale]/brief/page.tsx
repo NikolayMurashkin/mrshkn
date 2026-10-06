@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import { Brief } from '@/components/Brief/Brief';
+import { DesignSection } from '@/designs/registry';
 import { getDesign } from '@/designs/server';
 import { BRIEF_HREF, BRIEF_STEP_VALUES } from '@/lib/brief/consts';
 
@@ -28,8 +28,9 @@ const BriefPage = async ({ params, searchParams }: BriefPageProps) => {
   const design = await getDesign();
 
   return (
-    <Brief
+    <DesignSection
       design={design}
+      section="brief"
       plan={plan && BRIEF_STEP_VALUES.product.includes(plan) ? plan : null}
     />
   );

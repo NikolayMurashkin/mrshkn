@@ -1,5 +1,7 @@
 'use client';
 
+import { Brief } from '@/components/Brief/Brief';
+import { BriefThanks } from '@/components/Brief/BriefThanks';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
 import './fonts';
@@ -19,6 +21,8 @@ const COMPONENTS: DesignComponents = {
   process: EditorialProcess,
   case: EditorialCase,
   footer: EditorialFooter,
+  brief: Brief,
+  briefThanks: BriefThanks,
 };
 
 export const EditorialSection = (props: SectionProps) => renderSection(COMPONENTS, props);

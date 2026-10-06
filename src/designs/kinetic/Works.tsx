@@ -5,6 +5,8 @@ import { CARD_METRICS_LIMIT, caseHref } from '@/content/work';
 import { Link } from '@/i18n/navigation';
 import { DESIGN_LABELS } from '../consts';
 import type { WorksProps } from '../types';
+import { ArrowUpRightIcon } from './icons';
+import { SectionHead } from './SectionHead';
 import styles from './Works.module.scss';
 
 export const KineticWorks = ({ cases }: WorksProps) => {
@@ -22,15 +24,12 @@ export const KineticWorks = ({ cases }: WorksProps) => {
       id="work"
       aria-labelledby="work-heading"
     >
-      <div className={styles.head}>
-        <h2
-          className={styles.heading}
-          id="work-heading"
-        >
-          {t('heading')}
-        </h2>
-        <p className={styles.note}>{t('note')}</p>
-      </div>
+      <SectionHead
+        id="work-heading"
+        kicker={t('kineticKicker')}
+        title={t('heading')}
+        note={t('note')}
+      />
       <ul className={styles.list}>
         {cases.map((item) => (
           <li
@@ -38,11 +37,13 @@ export const KineticWorks = ({ cases }: WorksProps) => {
             data-testid="case-card"
             key={item.slug}
           >
-            <CaseImage
-              className={styles.cover}
-              image={item.cover}
-              sizes={CASE_CARD_SIZES}
-            />
+            <span className={styles.cover}>
+              <CaseImage
+                className={styles.image}
+                image={item.cover}
+                sizes={CASE_CARD_SIZES}
+              />
+            </span>
             <div className={styles.body}>
               <span className={styles.kind}>{t(`kind.${item.kind}`)}</span>
               <h3 className={styles.title}>
@@ -78,6 +79,7 @@ export const KineticWorks = ({ cases }: WorksProps) => {
                   rel="noopener noreferrer"
                 >
                   {t('demoLink')}
+                  <ArrowUpRightIcon />
                 </a>
               ) : null}
             </div>

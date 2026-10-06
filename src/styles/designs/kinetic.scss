@@ -25,17 +25,41 @@
   --ink-inverse: #f2f1f3;
   --muted: #66636b;
   --line: #d9d7dc;
+  --line-strong: #85828b;
   --accent: #ff6a2b;
-  --accent-ink: #d94f14;
+  --accent-ink: #b64211;
   --accent-contrast: #151317;
   --surface: #ffffff;
   --surface-soft: #e8e7ea;
 
   --radius-control: 999px;
   --radius-surface: 24px;
+  --radius-inner: 16px;
   --border-width: 1.5px;
-  --border-width-strong: 1.5px;
+  --border-width-strong: 2px;
   --shadow-floating: 0 8px 24px rgb(0 0 0 / 18%);
+
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-40: 40px;
+  --space-56: 56px;
+  --space-72: 72px;
+  --space-120: 120px;
+  --gutter: clamp(20px, 4vw, 56px);
+
+  --duration-fast: 160ms;
+  --duration-base: 250ms;
+  --duration-slow: 600ms;
+  --duration-rise: 900ms;
+  --duration-stagger: 120ms;
+  --duration-spin: 14s;
+  --duration-tape: 22s;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-linear: linear;
 
   color-scheme: light;
 }
@@ -46,6 +70,7 @@
   --ink-inverse: #121114;
   --muted: #9d9a93;
   --line: #2b292e;
+  --line-strong: #6b6870;
   --accent: #ff6a2b;
   --accent-ink: #ff6a2b;
   --accent-contrast: #151317;
