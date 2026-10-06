@@ -56,7 +56,7 @@
         "prepayment": "50% upfront",
         "concept": "home screen concept",
         "staging": "staging, forms, analytics",
-        "lighthouse": "lighthouse ≥ 90 on all four metrics",
+        "lighthouse": "lighthouse performance ≥ 90",
         "handover": "domain, access, source code",
         "warranty": "<k>warranty</k> 30 days"
       },
@@ -89,7 +89,7 @@
       "primaryCta": "Get a quote",
       "secondaryCta": "How we work",
       "quoteKicker": "From the contract",
-      "quote": "“The deadline is fourteen days. The acceptance criterion is Lighthouse no lower than 90 on each of the four metrics.”",
+      "quote": "“The deadline is fourteen days. The acceptance criterion is a Lighthouse Performance score of at least 90 in each of three runs.”",
       "refDeadline": "— Deadline",
       "refQuality": "— Quality",
       "refWarranty": "— Thirty days of warranty"
