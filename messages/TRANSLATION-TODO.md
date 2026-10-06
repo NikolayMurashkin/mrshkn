@@ -26,6 +26,7 @@
 | `hero.kinetic.tapeCode`, `hero.kinetic.dayUnit`, `pricing.kineticKicker`, `work.kineticKicker` | подписи ленты, рубрик и единицы дня Kinetic: Code, Plans, Work, day                                                                          |
 | `hero.*.secondaryCta`, `footer.cta`                                                            | вторая кнопка hero теперь ведет в процесс, кнопка подвала — в квиз; прежние тексты про кейсы и Telegram сняты                                |
 | `hero.editorial.quote`, `hero.terminal.log.lighthouse`                                         | 06.10.2026 сверены с договором: критерий приемки — Lighthouse Performance ≥ 90 в каждом из трех замеров, «четыре метрики» сняты              |
+| `pricing.plans.support.summary`                                                                | 06.10.2026: «Hosting» → «Hosting management» — хостинг на аккаунте клиента, студия его администрирует                                        |
 
 ## Русских заглушек не осталось
 

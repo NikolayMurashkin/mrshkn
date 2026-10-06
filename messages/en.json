@@ -143,7 +143,7 @@
       },
       "support": {
         "name": "Support",
-        "summary": "Hosting, monitoring, backups, updates and revision hours by plan",
+        "summary": "Hosting management, monitoring, backups, updates and revision hours by plan",
         "term": "monthly"
       }
     },
