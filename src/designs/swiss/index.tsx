@@ -2,6 +2,7 @@
 
 import { Brief } from '@/components/Brief/Brief';
 import { BriefThanks } from '@/components/Brief/BriefThanks';
+import { ServicePage } from '@/components/ServicePage/ServicePage';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
 import './fonts';
@@ -23,6 +24,7 @@ const COMPONENTS: DesignComponents = {
   footer: SwissFooter,
   brief: Brief,
   briefThanks: BriefThanks,
+  servicePage: ServicePage,
 };
 
 export const SwissSection = (props: SectionProps) => renderSection(COMPONENTS, props);

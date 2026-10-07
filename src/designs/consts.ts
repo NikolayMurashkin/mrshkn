@@ -12,6 +12,7 @@ export const SECTION_NAMES = [
   'footer',
   'brief',
   'briefThanks',
+  'servicePage',
 ] as const;
 
 export const DEFAULT_DESIGN = 'kinetic' satisfies (typeof DESIGN_NAMES)[number];

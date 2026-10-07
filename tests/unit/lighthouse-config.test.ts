@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 import { SLUG_PATTERN } from '@/cms/consts';
+import { PRICING_PLANS } from '@/content/pricing';
 
 const require = createRequire(import.meta.url);
 
@@ -16,7 +17,33 @@ type LighthouseConfig = {
   };
 };
 
-const config = require('../../lighthouserc.cjs') as LighthouseConfig;
+const CONFIG_PATH = '../../lighthouserc.cjs';
+
+const loadConfig = (design?: string): LighthouseConfig => {
+  const previous = process.env.LIGHTHOUSE_DESIGN;
+
+  if (design === undefined) {
+    delete process.env.LIGHTHOUSE_DESIGN;
+  } else {
+    process.env.LIGHTHOUSE_DESIGN = design;
+  }
+
+  delete require.cache[require.resolve(CONFIG_PATH)];
+
+  try {
+    return require(CONFIG_PATH) as LighthouseConfig;
+  } finally {
+    if (previous === undefined) {
+      delete process.env.LIGHTHOUSE_DESIGN;
+    } else {
+      process.env.LIGHTHOUSE_DESIGN = previous;
+    }
+
+    delete require.cache[require.resolve(CONFIG_PATH)];
+  }
+};
+
+const config = loadConfig('kinetic');
 
 describe('lighthouserc.cjs', () => {
   it('порог считается по худшему из прогонов, не по лучшему', () => {
@@ -32,6 +59,29 @@ describe('lighthouserc.cjs', () => {
   });
 });
 
+describe('адреса Lighthouse по направлениям', () => {
+  it('Kinetic меряет главную, один кейс и шесть страниц услуг', () => {
+    const urls = loadConfig('kinetic').ci.collect.url;
+    const caseUrls = urls.filter((url) => url.startsWith('http://localhost:3102/ru/work/'));
+
+    expect(urls).toHaveLength(8);
+    expect(urls[0]).toBe('http://localhost:3102/ru');
+    expect(caseUrls).toHaveLength(1);
+    expect(caseUrls[0].slice('http://localhost:3102/ru/work/'.length)).toMatch(SLUG_PATTERN);
+    expect(urls.filter((url) => !caseUrls.includes(url) && url !== urls[0]).sort()).toEqual(
+      PRICING_PLANS.map((plan) => `http://localhost:3102/ru/${plan.slug}`).sort(),
+    );
+  });
+
+  it.each(['terminal', 'pop', 'swiss', 'editorial'])('%s меряет только главную и кейс', (design) => {
+    const urls = loadConfig(design).ci.collect.url;
+
+    expect(urls).toHaveLength(2);
+    expect(urls[0]).toBe('http://localhost:3102/ru');
+    expect(urls[1].startsWith('http://localhost:3102/ru/work/')).toBe(true);
+  });
+});
+
 type WorkflowStep = { name?: string; run?: string };
 
 type Workflow = { jobs: Record<string, { services?: Record<string, unknown>; steps: WorkflowStep[] }> };
@@ -43,12 +93,12 @@ describe('джоба Lighthouse с кейсом', () => {
     const [home, ...rest] = config.ci.collect.url;
 
     expect(home).toBe('http://localhost:3102/ru');
-    expect(rest).toHaveLength(1);
 
     const prefix = 'http://localhost:3102/ru/work/';
+    const caseUrls = rest.filter((url) => url.startsWith(prefix));
 
-    expect(rest[0].startsWith(prefix)).toBe(true);
-    expect(rest[0].slice(prefix.length)).toMatch(SLUG_PATTERN);
+    expect(caseUrls).toHaveLength(1);
+    expect(caseUrls[0].slice(prefix.length)).toMatch(SLUG_PATTERN);
 
     const job = workflow.jobs.lighthouse;
     const runs = job.steps.map((step) => step.run ?? '');

@@ -3,7 +3,16 @@ import { DESIGNS, LOCALES } from './consts';
 import { openDesign } from './open-design';
 
 /** Шапка и подвал живут на каждой странице, поэтому проверяются и на квизе, и на «спасибо». */
-const INNER_PAGES = ['/brief', '/brief/thanks'] as const;
+const INNER_PAGES = [
+  '/brief',
+  '/brief/thanks',
+  '/landing',
+  '/business',
+  '/mini-app',
+  '/store',
+  '/mvp',
+  '/support',
+] as const;
 
 const zonesOf = (page: Page, path: string): Locator[] =>
   path === ''

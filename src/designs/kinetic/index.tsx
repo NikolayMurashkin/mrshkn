@@ -11,6 +11,7 @@ import { KineticBrief } from './KineticBrief';
 import { KineticBriefThanks } from './KineticBriefThanks';
 import { KineticPricing } from './Pricing';
 import { KineticProcess } from './Process';
+import { KineticServicePage } from './ServicePage';
 import { KineticWorks } from './Works';
 
 const COMPONENTS: DesignComponents = {
@@ -23,6 +24,7 @@ const COMPONENTS: DesignComponents = {
   footer: KineticFooter,
   brief: KineticBrief,
   briefThanks: KineticBriefThanks,
+  servicePage: KineticServicePage,
 };
 
 export const KineticSection = (props: SectionProps) => renderSection(COMPONENTS, props);

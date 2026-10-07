@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 import type { CaseCard, CaseDetail } from '@/cms/types';
 import type { BriefProps } from '@/components/Brief/types';
+import type { ServicePageProps } from '@/components/ServicePage/types';
 import type { DESIGN_NAMES, SECTION_NAMES } from './consts';
 
 /** Направление дизайна сайта — одно из пяти, выбор хранится в cookie `design`. */
@@ -10,7 +11,7 @@ export type DesignName = (typeof DESIGN_NAMES)[number];
 export type SectionName = (typeof SECTION_NAMES)[number];
 
 /** Секции, которым нужны данные: их читают серверные страницы, а клиентский чанк направления рисует. */
-type DataSectionName = 'header' | 'works' | 'case' | 'brief';
+type DataSectionName = 'header' | 'works' | 'case' | 'brief' | 'servicePage';
 
 /** Пропсы шапки: пункт «Кейсы» показывается, только если кейсы есть. */
 export type HeaderProps = { hasCases: boolean };
@@ -30,6 +31,7 @@ export type SectionProps =
   | ({ section: 'works' } & WorksProps)
   | ({ section: 'case' } & CaseProps)
   | ({ section: 'brief' } & BriefProps)
+  | ({ section: 'servicePage' } & ServicePageProps)
   | { section: Exclude<SectionName, DataSectionName> };
 
 /** Пропсы `DesignSection` из реестра: секция какого направления нужна в этом слоте. */
@@ -48,4 +50,5 @@ export type DesignComponents = {
   footer: ComponentType;
   brief: ComponentType<BriefProps>;
   briefThanks: ComponentType;
+  servicePage: ComponentType<ServicePageProps>;
 };

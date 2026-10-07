@@ -51,3 +51,35 @@ export type PricingExtra = {
   price: Money;
   period: PricePeriod;
 };
+
+/** Страница услуги: тариф из прайса, его адрес и опции, которые показываются на странице. */
+export type Service = {
+  /** Ключ тарифа из `PRICING_PLANS`: по нему тексты в messages и предвыбор в квизе. */
+  id: string;
+  /** Сегмент адреса страницы, тот же, что у тарифа. */
+  slug: string;
+  /** Опции этой услуги — ключи из `PRICING_OPTIONS`. */
+  options: readonly string[];
+};
+
+/** Вопрос и ответ FAQ услуги из файла переводов. */
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+/** JSON-LD `FAQPage` страницы услуги (D13). */
+export type FaqJsonLd = {
+  '@context': 'https://schema.org';
+  '@type': 'FAQPage';
+  mainEntity: {
+    '@type': 'Question';
+    name: string;
+    acceptedAnswer: { '@type': 'Answer'; text: string };
+  }[];
+};
+
+/** Часть файла переводов, из которой собирается FAQ услуги. */
+export type ServiceMessages = {
+  services?: Record<string, { faq?: FaqItem[] } | undefined>;
+};

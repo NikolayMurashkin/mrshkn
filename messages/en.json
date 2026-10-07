@@ -408,5 +408,287 @@
     "text": "We reply within an hour during working hours, on the channel you left us.",
     "note": "If you do not hear back, write to hello@mrshkn.com.",
     "back": "Back to the homepage"
+  },
+  "servicePage": {
+    "kicker": "Service",
+    "back": "Services and pricing",
+    "basicsHeading": "What is included",
+    "basicsNote": "13 items, no extra fees",
+    "optionsHeading": "Options",
+    "optionsNote": "Only what fits this service",
+    "allOptions": "All options and prices",
+    "processHeading": "How the work goes",
+    "faqHeading": "Questions",
+    "cta": "Get a quote",
+    "priceKind": {
+      "exact": "Fixed price",
+      "from": "Price from — exact after the brief",
+      "month": "Monthly fee"
+    },
+    "perMonth": "{price} / mo",
+    "revisions": "2 rounds of revisions",
+    "cardPoints": {
+      "deadline": "Deadline written into the contract",
+      "warranty": "30-day warranty after launch"
+    }
+  },
+  "services": {
+    "landing": {
+      "faq": [
+        {
+          "question": "What is in the landing page and what is not?",
+          "answer": "One page with a custom design, a lead form, analytics and basic SEO. Everything else is an option: online booking, payments, a quiz, a calculator, a blog, CRM. Option prices are on this page."
+        },
+        {
+          "question": "How many days does a landing page take?",
+          "answer": "14 days, and the deadline is written into the contract."
+        },
+        {
+          "question": "How many revisions are included?",
+          "answer": "Two rounds of revisions. Extra revisions are billed at the hourly rate from the price list."
+        },
+        {
+          "question": "Will AI search find the site?",
+          "answer": "Every plan includes schema.org, llms.txt, FAQ markup, OG and hreflang, so the site is ready for AI search. We do not promise a place in the results."
+        }
+      ],
+      "process": [
+        {
+          "when": "Day 1",
+          "title": "Brief and offer",
+          "text": "A twenty-minute call, a one-page proposal, a 50% prepayment."
+        },
+        {
+          "when": "Day 3",
+          "title": "Hero screen concept",
+          "text": "On day three you see a live page, not a picture. One round of revisions here saves a week later."
+        },
+        {
+          "when": "Day 10",
+          "title": "Site on a staging domain",
+          "text": "All blocks, the lead form, analytics. Two rounds of revisions are included in the price."
+        },
+        {
+          "when": "Day 14",
+          "title": "Launch and 30-day warranty",
+          "text": "Move to your domain, handover of access and source code."
+        }
+      ]
+    },
+    "business": {
+      "faq": [
+        {
+          "question": "How is the Business site different from a landing page?",
+          "answer": "Up to seven pages instead of one, an admin panel for your own edits, a blog, Russian and English versions, and a CRM integration."
+        },
+        {
+          "question": "Can I edit the texts myself?",
+          "answer": "Yes, in the admin panel. In a one-hour training we show how to edit texts and check leads."
+        },
+        {
+          "question": "What if I need more than seven pages?",
+          "answer": "Extra pages are estimated separately by scope. We name the amount before work starts."
+        },
+        {
+          "question": "How long does the Business site take?",
+          "answer": "Three weeks, and the deadline is written into the contract. Two rounds of revisions are included."
+        }
+      ],
+      "process": [
+        {
+          "when": "Day 1",
+          "title": "Brief and structure",
+          "text": "A call, a page list (up to seven), a proposal and a contract with the deadline."
+        },
+        {
+          "when": "Week 1",
+          "title": "Design and concept",
+          "text": "Mockups of the home page and typical pages, the first round of revisions."
+        },
+        {
+          "when": "Week 2",
+          "title": "Development and admin panel",
+          "text": "Pages in two languages, the admin panel, forms, analytics and the CRM integration."
+        },
+        {
+          "when": "Week 3",
+          "title": "Testing and launch",
+          "text": "A staging domain, the second round of revisions, the move to your domain, training and a 30-day warranty."
+        }
+      ]
+    },
+    "miniApp": {
+      "faq": [
+        {
+          "question": "What does “Telegram and MAX for one price” mean?",
+          "answer": "One React codebase and two messenger adapters. The app runs in both Telegram and MAX, and the second platform adds nothing to the price."
+        },
+        {
+          "question": "Which modules can I add?",
+          "answer": "Booking, loyalty, a showcase with ordering, and a referral program. We settle the set at the brief."
+        },
+        {
+          "question": "Why is the price “from”?",
+          "answer": "Every project has its own modules and integrations. We name the exact amount after the brief."
+        },
+        {
+          "question": "What does the plan include besides the app itself?",
+          "answer": "A bot and an admin panel. The 3–4 week deadline is written into the contract."
+        }
+      ],
+      "process": [
+        {
+          "when": "Day 1",
+          "title": "Brief and modules",
+          "text": "A call, choosing modules, a proposal and a contract with the deadline."
+        },
+        {
+          "when": "Week 1",
+          "title": "Scenarios and mockups",
+          "text": "The customer path inside the messenger, app screens, the first round of revisions."
+        },
+        {
+          "when": "Weeks 2–3",
+          "title": "App, bot and admin panel",
+          "text": "One codebase, two adapters: Telegram and MAX."
+        },
+        {
+          "when": "Week 4",
+          "title": "Testing and launch",
+          "text": "Checks in both messengers, the second round of revisions, handover of access and a 30-day warranty."
+        }
+      ]
+    },
+    "store": {
+      "faq": [
+        {
+          "question": "How many products can I upload?",
+          "answer": "The plan includes a catalog of up to 100 products. For more, we estimate the scope separately."
+        },
+        {
+          "question": "Are payment and delivery included?",
+          "answer": "Yes: a cart, payment, delivery and an order admin panel. We agree on the payment provider and the delivery service at the brief."
+        },
+        {
+          "question": "Why is the price “from”?",
+          "answer": "Every store has its own integrations and catalog complexity. We name the exact amount after the brief."
+        },
+        {
+          "question": "Who manages the orders?",
+          "answer": "You do, in the order admin panel. In training we show how to use it."
+        }
+      ],
+      "process": [
+        {
+          "when": "Week 1",
+          "title": "Brief and catalog structure",
+          "text": "A call, a review of products and delivery methods, a proposal and a contract with the deadline."
+        },
+        {
+          "when": "Weeks 2–3",
+          "title": "Design",
+          "text": "The home page, a product card, the cart, the first round of revisions."
+        },
+        {
+          "when": "Weeks 3–6",
+          "title": "Development",
+          "text": "The catalog, cart, payment, delivery and the order admin panel."
+        },
+        {
+          "when": "Weeks 6–7",
+          "title": "Testing and launch",
+          "text": "Test orders, the second round of revisions, the move to your domain, training and a 30-day warranty."
+        }
+      ]
+    },
+    "mvp": {
+      "faq": [
+        {
+          "question": "What is an MVP in your plan?",
+          "answer": "A web app with authentication, user accounts, payments, integrations and analytics: the minimum you can use to test an idea with real users."
+        },
+        {
+          "question": "Why does it take 6–10 weeks?",
+          "answer": "The range depends on the number of user accounts and integrations. We fix the exact deadline in the contract after the brief."
+        },
+        {
+          "question": "Who owns the code?",
+          "answer": "The source code stays with you."
+        },
+        {
+          "question": "What happens after launch?",
+          "answer": "A 30-day warranty. After that you can add support or a Dev subscription."
+        }
+      ],
+      "process": [
+        {
+          "when": "Weeks 1–2",
+          "title": "Brief and MVP scope",
+          "text": "A call, a list of scenarios, what goes into the first version, a contract with the deadline."
+        },
+        {
+          "when": "Weeks 2–4",
+          "title": "Design and architecture",
+          "text": "Account screens, the data model, the list of integrations."
+        },
+        {
+          "when": "Weeks 4–9",
+          "title": "Iterative development",
+          "text": "Authentication, accounts, payments, integrations and analytics, with interim builds on a staging domain."
+        },
+        {
+          "when": "Weeks 9–10",
+          "title": "Testing and launch",
+          "text": "End-to-end checks, launch, handover of access and source code, a 30-day warranty."
+        }
+      ]
+    },
+    "support": {
+      "faq": [
+        {
+          "question": "What does support include?",
+          "answer": "Hosting administration, monitoring, backups, updates and hours of edits according to the plan."
+        },
+        {
+          "question": "Where does the hosting stay?",
+          "answer": "On your account. The studio administers it, and the access stays with you."
+        },
+        {
+          "question": "What if the hours of edits run out?",
+          "answer": "Extra work is billed at the hourly rate from the price list. If you need many edits, a Dev subscription is an option."
+        },
+        {
+          "question": "How do I pay for support?",
+          "answer": "Monthly. The price on this page is the fee for one month."
+        }
+      ],
+      "process": [
+        {
+          "when": "Ongoing",
+          "title": "Monitoring and backups",
+          "text": "We watch that the site is available and keep backup copies."
+        },
+        {
+          "when": "Every month",
+          "title": "Updates",
+          "text": "We update the environment and dependencies so the site does not fall behind."
+        },
+        {
+          "when": "During the month",
+          "title": "Edits within the plan hours",
+          "text": "You send a task, and we do it within the hours of your plan."
+        }
+      ],
+      "basics": {
+        "note": "Every month, under the contract",
+        "items": [
+          "Hosting management: hosting stays on your account, you keep the access",
+          "Uptime monitoring",
+          "Backups",
+          "Updates of the environment and dependencies",
+          "Hours of changes included in the plan"
+        ]
+      }
+    }
   }
 }

@@ -23,4 +23,7 @@ export const formatRange = ({ from, to }: PriceRange, locale: string) => {
   return isEnglish(locale) ? `$${bounds}` : `${bounds}${NBSP}₽`;
 };
 
-export const planHref = (locale: string, plan: PricingPlan) => `/${locale}/${plan.slug}?plan=${plan.id}`;
+/** Адрес страницы услуги без префикса языка: его добавляет `Link` из next-intl. */
+export const planPath = (plan: PricingPlan) => `/${plan.slug}?plan=${plan.id}`;
+
+export const planHref = (locale: string, plan: PricingPlan) => `/${locale}${planPath(plan)}`;

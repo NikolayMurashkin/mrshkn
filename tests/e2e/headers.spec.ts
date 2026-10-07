@@ -7,7 +7,14 @@ import { LOCALES, PRODUCTION_BASE_URL } from './consts';
  */
 const CLIENT_HINT_HEADERS = ['critical-ch', 'accept-ch'];
 
-const PAGES = LOCALES.flatMap((locale) => [`/${locale}`, `/${locale}/brief`, `/${locale}/brief/thanks`]);
+const SERVICE_PATHS = ['landing', 'business', 'mini-app', 'store', 'mvp', 'support'];
+
+const PAGES = LOCALES.flatMap((locale) => [
+  `/${locale}`,
+  `/${locale}/brief`,
+  `/${locale}/brief/thanks`,
+  ...SERVICE_PATHS.map((slug) => `/${locale}/${slug}`),
+]);
 
 test.describe('страницы сайта не просят подсказок клиента', () => {
   for (const path of PAGES) {

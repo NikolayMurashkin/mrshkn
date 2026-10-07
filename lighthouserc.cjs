@@ -1,12 +1,22 @@
 const design = process.env.LIGHTHOUSE_DESIGN ?? 'kinetic';
 
+const SERVICE_SLUGS = ['landing', 'business', 'mini-app', 'store', 'mvp', 'support'];
+
+const BASE_URL = 'http://localhost:3102';
+
+const urls = [`${BASE_URL}/ru`, `${BASE_URL}/ru/work/lighthouse-demo`];
+
+if (design === 'kinetic') {
+  urls.push(...SERVICE_SLUGS.map((slug) => `${BASE_URL}/ru/${slug}`));
+}
+
 module.exports = {
   ci: {
     collect: {
       startServerCommand: 'SITE_ENV=production NEXT_DIST_DIR=.next-production yarn start -p 3102',
       startServerReadyPattern: 'Ready in',
       startServerReadyTimeout: 120000,
-      url: ['http://localhost:3102/ru', 'http://localhost:3102/ru/work/lighthouse-demo'],
+      url: urls,
       numberOfRuns: 3,
       settings: {
         extraHeaders: { Cookie: `design=${design}` },

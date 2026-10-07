@@ -1,12 +1,12 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { planHref } from '@/content/format';
+import { useTranslations } from 'next-intl';
+import { planPath } from '@/content/format';
 import { PRICING_BASIC_GROUPS, PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
 import { usePriceText } from '@/content/use-price';
+import { Link } from '@/i18n/navigation';
 import styles from './Pricing.module.scss';
 
 export const SwissPricing = () => {
   const t = useTranslations('pricing');
-  const locale = useLocale();
   const price = usePriceText();
 
   return (
@@ -46,9 +46,9 @@ export const SwissPricing = () => {
               data-testid={`plan-${plan.id}`}
               key={plan.id}
             >
-              <a
+              <Link
                 className={styles.planLink}
-                href={planHref(locale, plan)}
+                href={planPath(plan)}
                 aria-label={t('planLink', { name: t(`plans.${plan.id}.name`) })}
               >
                 <span className={styles.index}>{String(index + 1).padStart(2, '0')}</span>
@@ -56,7 +56,7 @@ export const SwissPricing = () => {
                 <span className={styles.summary}>{t(`plans.${plan.id}.summary`)}</span>
                 <span className={styles.term}>{t(`plans.${plan.id}.term`)}</span>
                 <span className={styles.price}>{price.plan(plan)}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

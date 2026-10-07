@@ -1,12 +1,12 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { planHref } from '@/content/format';
+import { useTranslations } from 'next-intl';
+import { planPath } from '@/content/format';
 import { PRICING_BASIC_GROUPS, PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
 import { usePriceText } from '@/content/use-price';
+import { Link } from '@/i18n/navigation';
 import styles from './Pricing.module.scss';
 
 export const EditorialPricing = () => {
   const t = useTranslations('pricing');
-  const locale = useLocale();
   const price = usePriceText();
 
   return (
@@ -36,9 +36,9 @@ export const EditorialPricing = () => {
             data-testid={`plan-${plan.id}`}
             key={plan.id}
           >
-            <a
+            <Link
               className={styles.planLink}
-              href={planHref(locale, plan)}
+              href={planPath(plan)}
               aria-label={t('planLink', { name: t(`plans.${plan.id}.name`) })}
             >
               <span className={styles.line}>
@@ -48,7 +48,7 @@ export const EditorialPricing = () => {
               </span>
               <span className={styles.summary}>{t(`plans.${plan.id}.summary`)}</span>
               <span className={styles.price}>{price.plan(plan)}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
