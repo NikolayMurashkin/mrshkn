@@ -4,8 +4,12 @@
   @return string.unquote("'#{$text}' / ''");
 }
 
-@mixin section {
+@mixin anchor {
   scroll-margin-top: 88px;
+}
+
+@mixin section {
+  @include anchor;
   display: flex;
   flex-direction: column;
   gap: 48px;

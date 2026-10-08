@@ -1,56 +1,58 @@
 import { useEffect, useState } from 'react';
-import { ACTIVE_SECTION_MARGIN, PAGE_END_TOLERANCE } from './consts';
+import { ACTIVE_SECTION_TOLERANCE, ANCHOR_OFFSET, PAGE_END_TOLERANCE } from './consts';
 
 export const useActiveSection = (ids: readonly string[], enabled: boolean) => {
-  const [inView, setInView] = useState<string | null>(null);
-  const [atEnd, setAtEnd] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     if (!enabled) {
       return;
     }
 
-    const inBand = new Set<string>();
-    const reversed = [...ids].reverse();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            inBand.add(entry.target.id);
-          } else {
-            inBand.delete(entry.target.id);
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+
+      const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - PAGE_END_TOLERANCE;
+      let next: string | null = null;
+
+      if (atEnd) {
+        next = ids[ids.length - 1] ?? null;
+      } else {
+        const line = ANCHOR_OFFSET + ACTIVE_SECTION_TOLERANCE;
+        let nearest = -Infinity;
+
+        for (const id of ids) {
+          const top = document.getElementById(id)?.getBoundingClientRect().top;
+
+          if (top !== undefined && top <= line && top > nearest) {
+            nearest = top;
+            next = id;
           }
         }
-
-        setInView(reversed.find((id) => inBand.has(id)) ?? null);
-      },
-      { rootMargin: ACTIVE_SECTION_MARGIN },
-    );
-
-    for (const id of ids) {
-      const element = document.getElementById(id);
-
-      if (element) {
-        observer.observe(element);
       }
-    }
 
-    const onScroll = () => {
-      setAtEnd(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - PAGE_END_TOLERANCE);
+      setActive(next);
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (!frame) {
+        frame = window.requestAnimationFrame(update);
+      }
+    };
+
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+
       window.removeEventListener('scroll', onScroll);
     };
   }, [ids, enabled]);
 
-  if (!enabled) {
-    return null;
-  }
-
-  return atEnd ? (ids[ids.length - 1] ?? null) : inView;
+  return enabled ? active : null;
 };

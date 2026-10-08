@@ -21,6 +21,7 @@
 }
 
 .table {
+  @include s.anchor;
   width: 100%;
   border-collapse: collapse;
   font-family: var(--font-display);

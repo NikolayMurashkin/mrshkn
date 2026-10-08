@@ -11,7 +11,9 @@ export const TERMINAL_LOG_LINES: TerminalLogLine[] = [
   { key: 'warranty', day: null, status: 'active' },
 ];
 
-export const ACTIVE_SECTION_MARGIN = '-40% 0px -55% 0px';
+export const ANCHOR_OFFSET = 88;
+
+export const ACTIVE_SECTION_TOLERANCE = 12;
 
 export const WORK_PATH_PREFIX = '/work/';
 
