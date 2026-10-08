@@ -12,7 +12,10 @@ export const TerminalFooter = () => {
       id="contacts"
     >
       <div className={styles.lead}>
-        <span className={styles.command}>
+        <span
+          className={styles.command}
+          translate="no"
+        >
           <span className={styles.prompt}>$</span> {t('command')}
         </span>
         <p className={styles.heading}>{t('heading')}</p>

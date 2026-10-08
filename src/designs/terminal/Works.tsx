@@ -30,7 +30,13 @@ export const TerminalWorks = ({ cases }: WorksProps) => {
           {t('heading')}
         </h2>
         <p className={styles.note}>
-          <span className={styles.prompt}>{'//'}</span> {t('note')}
+          <span
+            className={styles.prompt}
+            aria-hidden="true"
+          >
+            {'//'}
+          </span>{' '}
+          {t('note')}
         </p>
       </div>
       <ul className={styles.list}>
@@ -40,11 +46,21 @@ export const TerminalWorks = ({ cases }: WorksProps) => {
             data-testid="case-card"
             key={item.slug}
           >
-            <CaseImage
-              className={styles.cover}
-              image={item.cover}
-              sizes={CASE_CARD_SIZES}
-            />
+            <div className={styles.window}>
+              <div
+                className={styles.bar}
+                aria-hidden="true"
+              >
+                <span className={styles.dot} />
+                <span className={styles.dot} />
+                <span className={styles.dot} />
+              </div>
+              <CaseImage
+                className={styles.cover}
+                image={item.cover}
+                sizes={CASE_CARD_SIZES}
+              />
+            </div>
             <div className={styles.body}>
               <span className={styles.kind}>{t(`kind.${item.kind}`)}</span>
               <h3 className={styles.title}>

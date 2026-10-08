@@ -1,7 +1,5 @@
 'use client';
 
-import { Brief } from '@/components/Brief/Brief';
-import { BriefThanks } from '@/components/Brief/BriefThanks';
 import { ServicePage } from '@/components/ServicePage/ServicePage';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
@@ -12,6 +10,8 @@ import { TerminalHeader } from './Header';
 import { TerminalHero } from './Hero';
 import { TerminalPricing } from './Pricing';
 import { TerminalProcess } from './Process';
+import { TerminalBrief } from './TerminalBrief';
+import { TerminalBriefThanks } from './TerminalBriefThanks';
 import { TerminalWorks } from './Works';
 
 const COMPONENTS: DesignComponents = {
@@ -22,8 +22,8 @@ const COMPONENTS: DesignComponents = {
   process: TerminalProcess,
   case: TerminalCase,
   footer: TerminalFooter,
-  brief: Brief,
-  briefThanks: BriefThanks,
+  brief: TerminalBrief,
+  briefThanks: TerminalBriefThanks,
   servicePage: ServicePage,
 };
 

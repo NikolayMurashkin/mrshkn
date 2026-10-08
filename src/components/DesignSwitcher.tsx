@@ -117,6 +117,7 @@ export const DesignSwitcher = ({ design }: DesignSwitcherProps) => {
               <button
                 type="button"
                 className={name === design ? styles.itemActive : styles.item}
+                aria-current={name === design ? 'true' : undefined}
                 onClick={() => select(name)}
               >
                 {DESIGN_LABELS[name]}

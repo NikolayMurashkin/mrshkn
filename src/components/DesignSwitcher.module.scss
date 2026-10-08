@@ -1,3 +1,5 @@
+@use 'sass:string';
+
 .root {
   position: fixed;
   right: 24px;
@@ -14,6 +16,7 @@
 }
 
 .pill {
+  border-color: var(--switcher-border, var(--line));
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -76,8 +79,52 @@
 [data-design='terminal'] .pill,
 [data-design='terminal'] .menu {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+[data-design='terminal'] .pill {
+  height: 44px;
+  padding: 0 18px;
+
+  &:hover {
+    color: var(--ink);
+  }
+
+  svg {
+    display: none;
+  }
+
+  &::before {
+    content: string.unquote("'' / ''");
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-round);
+    background: var(--accent);
+  }
+}
+
+[data-design='terminal'] .menu {
+  min-width: 200px;
+}
+
+[data-design='terminal'] .item,
+[data-design='terminal'] .itemActive {
+  padding: 10px 12px;
+
+  &::before {
+    content: string.unquote("'  ' / ''");
+    white-space: pre;
+  }
+}
+
+[data-design='terminal'] .itemActive {
+  font-weight: 700;
+
+  &::before {
+    content: string.unquote("'> ' / ''");
+  }
 }
 
 [data-design='pop'] .pill,

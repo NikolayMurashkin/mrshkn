@@ -1,10 +1,16 @@
+@use './shared' as s;
+
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 22px clamp(20px, 4vw, 56px);
+  padding: 18px var(--t-gutter);
   border-bottom: var(--border-width) solid var(--line);
+  background: var(--bg);
 }
 
 .brand {
@@ -18,8 +24,10 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 20px;
+  line-height: 1;
   letter-spacing: 0.02em;
   text-transform: lowercase;
+  white-space: nowrap;
 }
 
 .path {
@@ -39,10 +47,22 @@
   gap: 28px;
   font-size: 15px;
   font-weight: 500;
-}
 
-.nav a:hover {
-  color: var(--accent-ink);
+  a {
+    padding: 4px 0;
+    border-bottom: var(--border-width-strong) solid transparent;
+    transition:
+      color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+
+    &:hover {
+      color: var(--accent-ink);
+    }
+
+    &[aria-current] {
+      border-bottom-color: var(--accent-ink);
+    }
+  }
 }
 
 .controls {
@@ -53,7 +73,7 @@
 
 .locales {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 500;
@@ -63,14 +83,26 @@
 .localeActive {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .locale {
   color: var(--muted);
+
+  &:hover {
+    color: var(--ink);
+  }
 }
 
-.locale:hover {
+.localeActive {
   color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-ink);
+  text-decoration-thickness: var(--border-width-strong);
+  text-underline-offset: 5px;
 }
 
 .theme {
@@ -81,13 +113,15 @@
   height: 40px;
   padding: 0;
   border: 0;
+  border-radius: var(--radius-control);
   background: transparent;
   color: inherit;
   cursor: pointer;
-}
+  transition: color var(--duration-fast) var(--ease-out);
 
-.theme:hover {
-  color: var(--accent-ink);
+  &:hover {
+    color: var(--accent-ink);
+  }
 }
 
 .status {
@@ -108,30 +142,15 @@
 }
 
 .cta {
-  display: inline-flex;
-  align-items: center;
+  @include s.button;
+
   height: 42px;
   padding: 0 18px;
-  border: var(--border-width) solid var(--ink);
-  border-radius: var(--radius-control);
-  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
 }
 
-.cta:hover {
-  background: var(--ink);
-  color: var(--ink-inverse);
-}
-
-@media (max-width: 1100px) {
-  .status {
-    display: none;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
+  .status,
   .nav {
     display: none;
   }
@@ -140,7 +159,6 @@
   .localeActive {
     min-width: 44px;
     min-height: 48px;
-    justify-content: center;
   }
 
   .locales {
@@ -153,10 +171,10 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 480px) {
   .header {
     gap: 12px;
-    padding: 12px 20px;
+    padding: 12px var(--t-gutter);
   }
 
   .tagline,
@@ -165,6 +183,6 @@
   }
 
   .controls {
-    gap: 8px;
+    gap: 4px;
   }
 }

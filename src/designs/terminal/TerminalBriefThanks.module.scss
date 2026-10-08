@@ -1,0 +1,121 @@
+@use './shared' as s;
+
+.thanks {
+  display: flex;
+  justify-content: center;
+  padding: 96px var(--t-gutter);
+  min-width: 0;
+}
+
+.window {
+  @include s.window;
+
+  width: 100%;
+  max-width: 760px;
+}
+
+.bar {
+  @include s.window-bar;
+}
+
+.dot {
+  @include s.window-dot;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px;
+  min-width: 0;
+}
+
+.prompt {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.sign {
+  color: var(--accent-ink);
+}
+
+.status {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ok);
+}
+
+.title {
+  margin: 0;
+  width: 100%;
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  hyphens: none;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  min-width: 0;
+}
+
+.text {
+  margin: 0;
+  width: 100%;
+  max-width: 560px;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.5;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  min-width: 0;
+}
+
+.mark {
+  color: var(--accent-ink);
+}
+
+.note {
+  margin: 0;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  min-width: 0;
+}
+
+.button {
+  @include s.button;
+
+  &:focus-visible {
+    outline: var(--border-width-strong) solid var(--accent-ink);
+    outline-offset: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thanks {
+    padding: 48px var(--t-gutter);
+  }
+
+  .body {
+    padding: 20px;
+  }
+
+  .prompt {
+    font-size: 14px;
+  }
+}

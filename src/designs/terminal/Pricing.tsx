@@ -24,7 +24,13 @@ export const TerminalPricing = () => {
           {t('heading')}
         </h2>
         <p className={styles.note}>
-          <span className={styles.prompt}>{'//'}</span> {t('note')}
+          <span
+            className={styles.prompt}
+            aria-hidden="true"
+          >
+            {'//'}
+          </span>{' '}
+          {t('note')}
         </p>
       </div>
 
@@ -138,6 +144,10 @@ export const TerminalPricing = () => {
                 key={option.id}
               >
                 <span className={styles.optionName}>{t(`options.${option.id}.name`)}</span>
+                <span
+                  className={styles.optionLeader}
+                  aria-hidden="true"
+                />
                 <span
                   className={styles.optionPrice}
                   data-testid="option-price"

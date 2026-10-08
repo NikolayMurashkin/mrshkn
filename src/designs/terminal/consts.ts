@@ -1,3 +1,4 @@
+import { PROCESS_STEPS } from '@/content/process';
 import type { TerminalLogLine } from './types';
 
 export const TERMINAL_LOG_LINES: TerminalLogLine[] = [
@@ -9,3 +10,13 @@ export const TERMINAL_LOG_LINES: TerminalLogLine[] = [
   { key: 'handover', day: '14', status: 'ok' },
   { key: 'warranty', day: null, status: 'active' },
 ];
+
+export const ACTIVE_SECTION_MARGIN = '-40% 0px -55% 0px';
+
+export const WORK_PATH_PREFIX = '/work/';
+
+export const PAGE_END_TOLERANCE = 2;
+
+export const PROCESS_SCALE_DAYS = Array.from({ length: 14 }, (_, index) => index + 1);
+
+export const PROCESS_KEY_DAYS: ReadonlySet<number> = new Set(PROCESS_STEPS.map((step) => step.day));

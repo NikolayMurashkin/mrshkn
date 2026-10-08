@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
 import { TERMINAL_LOG_LINES } from './consts';
 import { Link } from '@/i18n/navigation';
@@ -14,8 +15,17 @@ export const TerminalHero = () => {
         aria-hidden="true"
       />
       <div className={styles.content}>
-        <p className={styles.prompt}>
-          <span className={styles.promptSign}>$</span> {t('terminal.prompt')}
+        <p
+          className={styles.prompt}
+          translate="no"
+        >
+          <span className={styles.promptSign}>$</span>{' '}
+          <span
+            className={styles.command}
+            style={{ '--chars': t('terminal.prompt').length } as CSSProperties}
+          >
+            {t('terminal.prompt')}
+          </span>
         </p>
         <h1 className={styles.title}>
           {t.rich('terminal.title', {
@@ -49,11 +59,17 @@ export const TerminalHero = () => {
           <span className={styles.panelTitle}>{t('terminal.logTitle')}</span>
         </div>
         <div className={styles.log}>
-          {TERMINAL_LOG_LINES.map((line) => (
+          {TERMINAL_LOG_LINES.map((line, index) => (
             <div
               key={line.key}
               className={styles.line}
             >
+              <span
+                className={styles.num}
+                aria-hidden="true"
+              >
+                {index + 1}
+              </span>
               {line.day && <span className={styles.time}>{t('terminal.day', { day: line.day })}</span>}
               <span className={styles.text}>
                 {t.rich(`terminal.log.${line.key}`, {

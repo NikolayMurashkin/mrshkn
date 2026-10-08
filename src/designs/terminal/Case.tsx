@@ -46,12 +46,22 @@ export const TerminalCase = ({ caseItem }: CaseProps) => {
         ) : null}
       </header>
 
-      <CaseImage
-        className={styles.cover}
-        image={cover}
-        sizes={CASE_COVER_SIZES}
-        priority
-      />
+      <div className={styles.window}>
+        <div
+          className={styles.bar}
+          aria-hidden="true"
+        >
+          <span className={styles.dot} />
+          <span className={styles.dot} />
+          <span className={styles.dot} />
+        </div>
+        <CaseImage
+          className={styles.cover}
+          image={cover}
+          sizes={CASE_COVER_SIZES}
+          priority
+        />
+      </div>
 
       {texts.map(({ id, paragraphs }) => (
         <section
@@ -118,11 +128,21 @@ export const TerminalCase = ({ caseItem }: CaseProps) => {
           >
             {t('lighthouse')}
           </h2>
-          <CaseImage
-            className={styles.shot}
-            image={lighthouse}
-            sizes={CASE_SHOT_SIZES}
-          />
+          <div className={`${styles.window} ${styles.shot}`}>
+            <div
+              className={styles.bar}
+              aria-hidden="true"
+            >
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+            </div>
+            <CaseImage
+              className={styles.shotImage}
+              image={lighthouse}
+              sizes={CASE_SHOT_SIZES}
+            />
+          </div>
         </section>
       ) : null}
     </article>

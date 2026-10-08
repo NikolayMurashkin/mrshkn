@@ -13,29 +13,43 @@ import { TerminalSection } from '@/designs/terminal';
 
 vi.mock('next/font/local', () => ({ default: () => ({ className: '', style: {}, variable: '' }) }));
 
-const SHARED_DESIGNS = [
+const OWN_DESIGNS = [
+  ['kinetic', KineticSection],
   ['terminal', TerminalSection],
+] as const;
+
+const SHARED_DESIGNS = [
   ['pop', PopSection],
   ['swiss', SwissSection],
   ['editorial', EditorialSection],
 ] as const;
 
-describe('секции квиза в реестре направлений', () => {
-  it('Kinetic отдает для brief свой компонент, а не общий Brief', () => {
-    const element = KineticSection({ section: 'brief', design: 'kinetic', plan: null }) as ReactElement;
+const briefType = (Section: (typeof OWN_DESIGNS)[number][1], design: 'kinetic' | 'terminal') =>
+  (Section({ section: 'brief', design, plan: null }) as ReactElement).type;
 
-    expect(typeof element.type).toBe('function');
+const thanksType = (Section: (typeof OWN_DESIGNS)[number][1]) =>
+  (Section({ section: 'briefThanks' }) as ReactElement).type;
+
+describe('секции квиза в реестре направлений', () => {
+  it.each(OWN_DESIGNS)('%s отдает для brief свой компонент, а не общий Brief', (design, Section) => {
+    const element = Section({ section: 'brief', design, plan: null }) as ReactElement;
+    const [otherDesign, OtherSection] = OWN_DESIGNS.find(([name]) => name !== design)!;
+
     expect(element.type).not.toBe(Brief);
     expect(element.type).not.toBe(BriefView);
-    expect(element.props).toMatchObject({ design: 'kinetic', plan: null });
+    expect(typeof element.type).toBe('function');
+    expect(element.props).toMatchObject({ design, plan: null });
+    expect(element.type).not.toBe(briefType(OtherSection, otherDesign));
   });
 
-  it('Kinetic отдает для briefThanks свой компонент, а не общий BriefThanks', () => {
-    const element = KineticSection({ section: 'briefThanks' }) as ReactElement;
+  it.each(OWN_DESIGNS)('%s отдает для briefThanks свой компонент, а не общий BriefThanks', (design, Section) => {
+    const element = Section({ section: 'briefThanks' }) as ReactElement;
+    const [, OtherSection] = OWN_DESIGNS.find(([name]) => name !== design)!;
 
-    expect(typeof element.type).toBe('function');
     expect(element.type).not.toBe(BriefThanks);
     expect(element.type).not.toBe(BriefThanksView);
+    expect(typeof element.type).toBe('function');
+    expect(element.type).not.toBe(thanksType(OtherSection));
   });
 
   it.each(SHARED_DESIGNS)('%s отдает для brief общий Brief с предвыбором', (design, Section) => {
