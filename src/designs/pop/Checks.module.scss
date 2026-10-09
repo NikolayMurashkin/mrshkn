@@ -1,0 +1,26 @@
+@use './shared' as s;
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check {
+  @include s.stamp-check(var(--accent-ink));
+
+  font-weight: 500;
+  line-height: 1.4;
+
+  @include s.wrap;
+}
+
+.inherit .check {
+  &::before,
+  &::after {
+    border-color: currentcolor;
+  }
+}

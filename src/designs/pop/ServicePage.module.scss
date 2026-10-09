@@ -1,0 +1,263 @@
+@use './shared' as s;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-56);
+  padding: var(--space-40) var(--p-gutter) var(--space-96);
+  min-width: 0;
+}
+
+.back {
+  @include s.back-link;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  width: 100%;
+  max-width: 980px;
+  min-width: 0;
+}
+
+.label {
+  @include s.label;
+}
+
+.title {
+  @include s.page-title;
+
+  width: 100%;
+
+  @include s.wrap;
+}
+
+.lead {
+  @include s.lead;
+
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  @include s.tag;
+  @include s.tag-alt;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-12) var(--space-16);
+  min-width: 0;
+}
+
+.cta {
+  @include s.button;
+  @include s.button-primary;
+}
+
+.kind {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: start;
+  gap: var(--space-56);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-56);
+  min-width: 0;
+}
+
+.block {
+  @include s.block;
+}
+
+.blockHead {
+  @include s.block-head;
+}
+
+.blockTitle {
+  @include s.block-title;
+}
+
+.blockNote {
+  @include s.block-note;
+}
+
+.ownBasics {
+  @include s.group;
+}
+
+.more {
+  @include s.arrow-link;
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.question {
+  border: var(--border-width-strong) solid var(--ink);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+  transition: box-shadow var(--duration-fast) var(--ease-out);
+  min-width: 0;
+
+  &:hover,
+  &[open] {
+    box-shadow: var(--shadow-floating);
+  }
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-20) var(--space-24);
+  border-radius: var(--radius-surface);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-wrap: pretty;
+  list-style: none;
+  cursor: pointer;
+
+  @include s.wrap;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: '';
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border: var(--border-width) solid var(--ink);
+    border-radius: var(--radius-control);
+    background:
+      linear-gradient(currentcolor, currentcolor) center / 14px var(--border-width-strong) no-repeat,
+      linear-gradient(currentcolor, currentcolor) center / var(--border-width-strong) 14px no-repeat,
+      var(--accent-alt);
+    color: var(--ink-on-alt);
+    transition: transform var(--duration-base) var(--ease-spring);
+  }
+}
+
+.question[open] .summary::after {
+  transform: rotate(45deg);
+}
+
+.answer {
+  margin: 0;
+  padding: 0 var(--space-24) var(--space-24);
+  max-width: 68ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.aside {
+  position: sticky;
+  top: calc(#{s.$header-height} + var(--space-24));
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  padding: var(--space-32) 30px;
+  border: var(--border-width-strong) solid var(--ink);
+  border-radius: var(--radius-surface);
+  background: var(--accent-alt);
+  color: var(--ink-on-alt);
+  box-shadow: var(--shadow-surface);
+  transform: rotate(-1.5deg);
+  min-width: 0;
+
+  :focus-visible {
+    outline-color: var(--ink-on-alt);
+  }
+}
+
+.cardKind {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  @include s.wrap;
+}
+
+.amount {
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.cardTerm {
+  @include s.tag;
+}
+
+.cardCta {
+  @include s.button;
+  @include s.button-primary;
+
+  border-color: var(--ink-on-alt);
+
+  &:hover {
+    box-shadow: var(--shadow-floating-on-alt);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta,
+  .cardCta {
+    @include s.button-fluid;
+  }
+}

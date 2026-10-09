@@ -108,6 +108,53 @@ $header-height-compact: 84px;
   color: var(--muted);
 }
 
+@mixin block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  min-width: 0;
+}
+
+@mixin group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--space-24) 22px;
+  border: var(--border-width-strong) solid var(--ink);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+  box-shadow: var(--shadow-floating);
+  min-width: 0;
+}
+
+@mixin block-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-8) var(--space-24);
+}
+
+@mixin block-title {
+  margin: 0;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+
+  @include wrap;
+}
+
+@mixin block-note {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+
+  @include wrap;
+}
+
 @mixin tag {
   display: inline-flex;
   align-items: center;

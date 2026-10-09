@@ -1,11 +1,20 @@
 import { useTranslations } from 'next-intl';
 import { PROCESS_STEPS, PROMISES } from '@/content/process';
-import { POP_BOARD_DAYS, POP_KEY_DAY_TONES, POP_STEP_TONES } from './consts';
+import { POP_BOARD_DAYS, POP_KEY_DAY_TONES } from './consts';
+import { PopSteps } from './Steps';
 import styles from './Process.module.scss';
 
 export const PopProcess = () => {
   const t = useTranslations('process');
   const hero = useTranslations('hero');
+  const steps = PROCESS_STEPS.map((step) => ({
+    id: step.id,
+    day: step.day,
+    label: hero('kinetic.dayUnit'),
+    value: String(step.day),
+    title: t(`steps.${step.id}.title`),
+    text: t(`steps.${step.id}.text`),
+  }));
 
   return (
     <section
@@ -60,25 +69,11 @@ export const PopProcess = () => {
         })}
       </div>
 
-      <ol
-        className={styles.steps}
-        data-testid="steps"
-      >
-        {PROCESS_STEPS.map((step, index) => (
-          <li
-            className={styles.step}
-            data-day={step.day}
-            key={step.id}
-          >
-            <span className={`${styles.day} ${styles[`tone${POP_STEP_TONES[index % POP_STEP_TONES.length]}`]}`}>
-              <span className={styles.dayLabel}>{hero('kinetic.dayUnit')}</span>
-              <span className={styles.dayNum}>{step.day}</span>
-            </span>
-            <span className={styles.stepTitle}>{t(`steps.${step.id}.title`)}</span>
-            <span className={styles.stepText}>{t(`steps.${step.id}.text`)}</span>
-          </li>
-        ))}
-      </ol>
+      <PopSteps
+        steps={steps}
+        testId="steps"
+        titleTag="span"
+      />
     </section>
   );
 };

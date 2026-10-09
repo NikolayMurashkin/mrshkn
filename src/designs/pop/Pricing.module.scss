@@ -165,167 +165,19 @@
 }
 
 .block {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-24);
-  min-width: 0;
+  @include s.block;
 }
 
 .blockHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-8) var(--space-24);
+  @include s.block-head;
 }
 
 .blockTitle {
-  margin: 0;
-  font-size: clamp(24px, 2.6vw, 32px);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-
-  @include s.wrap;
+  @include s.block-title;
 }
 
 .blockNote {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-
-  @include s.wrap;
-}
-
-.groups {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-20);
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: var(--space-24) 22px;
-  border: var(--border-width-strong) solid var(--ink);
-  border-radius: var(--radius-surface);
-  background: var(--surface);
-  box-shadow: var(--shadow-floating);
-  min-width: 0;
-}
-
-.groupTitle {
-  align-self: flex-start;
-  margin: 0;
-  padding: 5px 14px;
-  border: var(--border-width) solid var(--ink);
-  border-radius: var(--radius-control);
-  background: var(--accent);
-  color: var(--accent-contrast);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.3;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-
-  @include s.wrap;
-}
-
-.group:nth-child(4n + 2) .groupTitle {
-  @include s.tone(1);
-}
-
-.group:nth-child(4n + 3) .groupTitle {
-  @include s.tone(2);
-}
-
-.group:nth-child(4n) .groupTitle {
-  @include s.tone(4);
-}
-
-.checks {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.check {
-  @include s.stamp-check(var(--accent-ink));
-
-  font-weight: 500;
-  line-height: 1.4;
-
-  @include s.wrap;
-}
-
-.pricelist {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-40);
-  margin: 0;
-  padding: var(--space-12) var(--space-32);
-  border: var(--border-width-strong) solid var(--ink);
-  border-radius: var(--radius-band);
-  background: var(--surface);
-  box-shadow: var(--shadow-surface);
-  list-style: none;
-}
-
-.option {
-  display: grid;
-  grid-template-columns: auto minmax(24px, 1fr) auto;
-  align-items: baseline;
-  gap: var(--space-4) var(--space-8);
-  padding: 14px 0;
-  border-bottom: var(--border-width) solid var(--line);
-  min-width: 0;
-}
-
-.optionName {
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.35;
-
-  @include s.wrap;
-}
-
-.optionDots {
-  align-self: end;
-  margin-bottom: 6px;
-  border-bottom: var(--border-width) dotted var(--muted);
-}
-
-.optionPrice {
-  font-size: 16px;
-  font-weight: 900;
-  white-space: nowrap;
-  color: var(--accent-ink);
-  font-variant-numeric: tabular-nums;
-}
-
-.optionNote {
-  grid-column: 1 / 3;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted);
-
-  @include s.wrap;
-}
-
-.optionMonthly {
-  grid-column: 3;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: right;
-  white-space: nowrap;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  @include s.block-note;
 }
 
 .extras {
@@ -383,13 +235,8 @@
 }
 
 @media (max-width: 1080px) {
-  .plans,
-  .groups {
+  .plans {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .pricelist {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -409,39 +256,5 @@
 
   .calloutStar {
     display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .groups {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .pricelist {
-    padding: var(--space-8) var(--space-20);
-    border-radius: var(--radius-surface);
-  }
-
-  .option {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .optionDots {
-    display: none;
-  }
-
-  .optionPrice,
-  .optionMonthly,
-  .optionNote {
-    grid-column: 1;
-    text-align: left;
-  }
-
-  .optionMonthly {
-    grid-row: 3;
-  }
-
-  .optionNote {
-    grid-row: 4;
   }
 }

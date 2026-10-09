@@ -16,3 +16,7 @@ export const POP_STEP_TONES: readonly PopTone[] = [1, 2, 3, 4];
 export const POP_KEY_DAY_TONES: ReadonlyMap<number, PopTone> = new Map(
   PROCESS_STEPS.map((step, index) => [step.day, POP_STEP_TONES[index % POP_STEP_TONES.length]]),
 );
+
+export const POP_STEP_WHEN_PATTERN = /^(.*?)\s*(\d+(?:\s*[–-]\s*\d+)?)$/u;
+
+export const POP_STEP_TEXT_TAGS = { h3: 'p', span: 'span' } as const;

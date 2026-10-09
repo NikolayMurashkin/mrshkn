@@ -15,10 +15,10 @@ vi.mock('next/font/local', () => ({ default: () => ({ className: '', style: {}, 
 const OWN_DESIGNS = [
   ['kinetic', KineticSection],
   ['terminal', TerminalSection],
+  ['pop', PopSection],
 ] as const;
 
 const SHARED_DESIGNS = [
-  ['pop', PopSection],
   ['swiss', SwissSection],
   ['editorial', EditorialSection],
 ] as const;
@@ -32,13 +32,18 @@ describe('секция страницы услуги в реестре напр�
 
   it.each(OWN_DESIGNS)('%s отдает для servicePage свой компонент, а не общий ServicePage', (design, Section) => {
     const element = Section(servicePageProps('landing')) as ReactElement;
-    const [, OtherSection] = OWN_DESIGNS.find(([name]) => name !== design)!;
-    const otherType = (OtherSection(servicePageProps('landing')) as ReactElement).type;
+    const others = OWN_DESIGNS.filter(([name]) => name !== design);
 
     expect(element.type).not.toBe(ServicePage);
     expect(element.type).not.toBe(ServicePageView);
     expect(typeof element.type).toBe('function');
-    expect(element.type).not.toBe(otherType);
+
+    for (const [other, OtherSection] of others) {
+      const otherType = (OtherSection(servicePageProps('landing')) as ReactElement).type;
+
+      expect(element.type, `компонент ${other}`).not.toBe(otherType);
+    }
+
     expect(element.props).toMatchObject({ service: 'landing' });
   });
 

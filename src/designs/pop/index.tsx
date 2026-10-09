@@ -1,6 +1,5 @@
 'use client';
 
-import { ServicePage } from '@/components/ServicePage/ServicePage';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
 import './fonts';
@@ -12,6 +11,7 @@ import { PopBrief } from './PopBrief';
 import { PopBriefThanks } from './PopBriefThanks';
 import { PopPricing } from './Pricing';
 import { PopProcess } from './Process';
+import { PopServicePage } from './ServicePage';
 import { PopWorks } from './Works';
 
 const COMPONENTS: DesignComponents = {
@@ -24,7 +24,7 @@ const COMPONENTS: DesignComponents = {
   footer: PopFooter,
   brief: PopBrief,
   briefThanks: PopBriefThanks,
-  servicePage: ServicePage,
+  servicePage: PopServicePage,
 };
 
 export const PopSection = (props: SectionProps) => renderSection(COMPONENTS, props);

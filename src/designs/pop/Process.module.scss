@@ -140,48 +140,6 @@
   box-shadow: var(--shadow-floating);
 }
 
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-32);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-  min-width: 0;
-}
-
-.day {
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  width: 84px;
-  height: 84px;
-  border: var(--border-width-strong) solid var(--ink);
-  border-radius: var(--radius-control);
-  box-shadow: var(--shadow-floating);
-}
-
-.dayLabel {
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.dayNum {
-  font-size: 40px;
-  font-weight: 900;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
 .tone1 {
   @include s.tone(1);
 }
@@ -198,24 +156,8 @@
   @include s.tone(4);
 }
 
-.stepTitle {
-  font-size: 20px;
-  font-weight: 900;
-  line-height: 1.2;
-
-  @include s.wrap;
-}
-
-.stepText {
-  line-height: 1.5;
-  color: var(--muted);
-
-  @include s.wrap;
-}
-
 @media (max-width: 1080px) {
-  .promises,
-  .steps {
+  .promises {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -231,8 +173,7 @@
 }
 
 @media (max-width: 480px) {
-  .promises,
-  .steps {
+  .promises {
     grid-template-columns: minmax(0, 1fr);
   }
 }
