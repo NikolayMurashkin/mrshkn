@@ -172,13 +172,18 @@
 @media (max-width: 1080px) {
   .aside {
     grid-column: 1 / -1;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
     gap: var(--space-8) 20px;
+
+    > :not(.index) {
+      grid-column: 2;
+    }
   }
 
   .index {
+    grid-row: 1 / span 4;
     margin: 0;
   }
 
@@ -232,6 +237,19 @@
 @media (max-width: 480px) {
   .hero {
     padding-top: var(--space-32);
+  }
+
+  .aside {
+    grid-template-columns: minmax(0, 1fr);
+
+    > :not(.index) {
+      grid-column: 1;
+    }
+  }
+
+  .index {
+    grid-row: auto;
+    margin-bottom: var(--space-8);
   }
 
   .button {
