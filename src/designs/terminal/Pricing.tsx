@@ -1,13 +1,21 @@
 import { useTranslations } from 'next-intl';
 import { planPath } from '@/content/format';
-import { PRICING_BASIC_GROUPS, PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
+import { PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
 import { usePriceText } from '@/content/use-price';
 import { Link } from '@/i18n/navigation';
+import { TerminalBasics } from './Basics';
+import { TerminalOptions } from './Options';
 import styles from './Pricing.module.scss';
 
 export const TerminalPricing = () => {
   const t = useTranslations('pricing');
   const price = usePriceText();
+  const options = PRICING_OPTIONS.map((option) => ({
+    id: option.id,
+    name: t(`options.${option.id}.name`),
+    note: t(`options.${option.id}.note`),
+    ...price.option(option),
+  }));
 
   return (
     <section
@@ -100,30 +108,7 @@ export const TerminalPricing = () => {
           <h3 className={styles.blockTitle}>{t('basicsHeading')}</h3>
           <p className={styles.blockNote}>{t('basicsNote')}</p>
         </div>
-        <div
-          className={styles.groups}
-          data-testid="basics"
-        >
-          {PRICING_BASIC_GROUPS.map((group) => (
-            <div
-              className={styles.group}
-              data-testid="basics-group"
-              key={group.id}
-            >
-              <h4 className={styles.groupTitle}>{t(`basicsGroups.${group.id}`)}</h4>
-              <ul className={styles.groupItems}>
-                {group.items.map((item) => (
-                  <li
-                    className={styles.basic}
-                    key={item}
-                  >
-                    {t(`basics.${item}`)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <TerminalBasics titleTag="h4" />
       </div>
 
       <div className={styles.optionsBlock}>
@@ -131,35 +116,10 @@ export const TerminalPricing = () => {
           <h3 className={styles.blockTitle}>{t('optionsHeading')}</h3>
           <p className={styles.blockNote}>{t('optionsNote')}</p>
         </div>
-        <ul
-          className={styles.options}
-          data-testid="options"
-        >
-          {PRICING_OPTIONS.map((option) => {
-            const { amount, monthly } = price.option(option);
-
-            return (
-              <li
-                className={styles.option}
-                key={option.id}
-              >
-                <span className={styles.optionName}>{t(`options.${option.id}.name`)}</span>
-                <span
-                  className={styles.optionLeader}
-                  aria-hidden="true"
-                />
-                <span
-                  className={styles.optionPrice}
-                  data-testid="option-price"
-                >
-                  {amount}
-                </span>
-                <span className={styles.optionNote}>{t(`options.${option.id}.note`)}</span>
-                {monthly ? <span className={styles.optionMonthly}>{monthly}</span> : null}
-              </li>
-            );
-          })}
-        </ul>
+        <TerminalOptions
+          items={options}
+          testId="options"
+        />
       </div>
 
       <div className={styles.extrasBlock}>

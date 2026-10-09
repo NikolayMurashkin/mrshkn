@@ -1,0 +1,173 @@
+import { useTranslations } from 'next-intl';
+import type { ServicePageProps } from '@/components/ServicePage/types';
+import { useServicePage } from '@/components/ServicePage/use-service-page';
+import { TerminalBasics } from './Basics';
+import { TerminalChecks } from './Checks';
+import { TerminalOptions } from './Options';
+import { TerminalSteps } from './Steps';
+import styles from './ServicePage.module.scss';
+
+export const TerminalServicePage = ({ service }: ServicePageProps) => {
+  const t = useTranslations('servicePage');
+  const data = useServicePage(service);
+
+  if (!data) {
+    return null;
+  }
+
+  const {
+    name,
+    summary,
+    term,
+    price,
+    cardAmount,
+    priceKind,
+    hasRevisions,
+    cardPoints,
+    ownBasics,
+    options,
+    steps,
+    faq,
+  } = data;
+
+  return (
+    <article
+      className={styles.page}
+      data-testid="service-page"
+      data-service={data.service.id}
+    >
+      <a
+        className={styles.back}
+        href={data.backHref}
+      >
+        ← {t('back')}
+      </a>
+
+      <header className={styles.head}>
+        <p className={styles.label}>{t('kicker')}</p>
+        <h1 className={styles.title}>{name}</h1>
+        <p className={styles.lead}>{summary}</p>
+        <ul className={styles.tags}>
+          <li className={styles.tag}>{term}</li>
+          <li className={styles.tag}>{price}</li>
+          {hasRevisions ? <li className={styles.tag}>{t('revisions')}</li> : null}
+        </ul>
+      </header>
+
+      <div className={styles.cols}>
+        <aside className={styles.aside}>
+          <div className={styles.card}>
+            <p className={styles.label}>{priceKind}</p>
+            <div className={styles.price}>
+              <span className={styles.amount}>{cardAmount}</span>
+              <span className={styles.term}>{term}</span>
+            </div>
+            {cardPoints.length > 0 ? <TerminalChecks items={cardPoints} /> : null}
+            <a
+              className={styles.cta}
+              href={data.briefHref}
+              data-testid="service-cta"
+            >
+              {t('cta')}
+            </a>
+          </div>
+        </aside>
+
+        <div className={styles.main}>
+          <section
+            className={styles.block}
+            aria-labelledby="service-basics"
+          >
+            <div className={styles.blockHead}>
+              <h2
+                className={styles.blockTitle}
+                id="service-basics"
+              >
+                {t('basicsHeading')}
+              </h2>
+              <p className={styles.blockNote}>{ownBasics ? ownBasics.note : t('basicsNote')}</p>
+            </div>
+            {ownBasics ? (
+              <TerminalChecks items={ownBasics.items} />
+            ) : (
+              <TerminalBasics
+                titleTag="h3"
+                narrow
+              />
+            )}
+          </section>
+
+          <section
+            className={styles.block}
+            aria-labelledby="service-options"
+          >
+            <div className={styles.blockHead}>
+              <h2
+                className={styles.blockTitle}
+                id="service-options"
+              >
+                {t('optionsHeading')}
+              </h2>
+              <p className={styles.blockNote}>{t('optionsNote')}</p>
+            </div>
+            <TerminalOptions
+              items={options}
+              testId="service-options"
+              narrow
+            />
+            <a
+              className={styles.more}
+              href={data.pricesHref}
+            >
+              {t('allOptions')}
+            </a>
+          </section>
+
+          <section
+            className={styles.block}
+            aria-labelledby="service-process"
+          >
+            <h2
+              className={styles.blockTitle}
+              id="service-process"
+            >
+              {t('processHeading')}
+            </h2>
+            <TerminalSteps
+              steps={steps.map(({ when, title, text }, index) => ({ id: String(index), label: when, title, text }))}
+              testId="service-process"
+              titleTag="h3"
+              narrow
+            />
+          </section>
+
+          <section
+            className={styles.block}
+            aria-labelledby="service-faq"
+          >
+            <h2
+              className={styles.blockTitle}
+              id="service-faq"
+            >
+              {t('faqHeading')}
+            </h2>
+            <div
+              className={styles.faq}
+              data-testid="service-faq"
+            >
+              {faq.map((item) => (
+                <details
+                  className={styles.question}
+                  key={item.question}
+                >
+                  <summary className={styles.summary}>{item.question}</summary>
+                  <p className={styles.answer}>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  );
+};

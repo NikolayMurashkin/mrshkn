@@ -45,23 +45,25 @@ const loadConfig = (design?: string): LighthouseConfig => {
 
 const config = loadConfig('kinetic');
 
-describe('lighthouserc.cjs', () => {
+describe.each(['kinetic', 'terminal'])('lighthouserc.cjs, %s', (design) => {
+  const designConfig = loadConfig(design);
+
   it('порог считается по худшему из прогонов, не по лучшему', () => {
-    expect(config.ci.assert.aggregationMethod).toBe('pessimistic');
+    expect(designConfig.ci.assert.aggregationMethod).toBe('pessimistic');
   });
 
   it('performance каждого прогона не ниже 90', () => {
-    expect(config.ci.assert.assertions['categories:performance']).toEqual(['error', { minScore: 0.9 }]);
+    expect(designConfig.ci.assert.assertions['categories:performance']).toEqual(['error', { minScore: 0.9 }]);
   });
 
   it('accessibility каждого прогона равна 100', () => {
-    expect(config.ci.assert.assertions['categories:accessibility']).toEqual(['error', { minScore: 1 }]);
+    expect(designConfig.ci.assert.assertions['categories:accessibility']).toEqual(['error', { minScore: 1 }]);
   });
 });
 
 describe('адреса Lighthouse по направлениям', () => {
-  it('Kinetic меряет главную, один кейс и шесть страниц услуг', () => {
-    const urls = loadConfig('kinetic').ci.collect.url;
+  it.each(['kinetic', 'terminal'])('%s меряет главную, один кейс и шесть страниц услуг', (design) => {
+    const urls = loadConfig(design).ci.collect.url;
     const caseUrls = urls.filter((url) => url.startsWith('http://localhost:3102/ru/work/'));
 
     expect(urls).toHaveLength(8);
@@ -73,7 +75,7 @@ describe('адреса Lighthouse по направлениям', () => {
     );
   });
 
-  it.each(['terminal', 'pop', 'swiss', 'editorial'])('%s меряет только главную и кейс', (design) => {
+  it.each(['pop', 'swiss', 'editorial'])('%s меряет только главную и кейс', (design) => {
     const urls = loadConfig(design).ci.collect.url;
 
     expect(urls).toHaveLength(2);

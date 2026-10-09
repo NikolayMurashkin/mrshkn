@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { ServicePage } from '@/components/ServicePage/ServicePage';
+import { ServicePageView } from '@/components/ServicePage/ServicePageView';
 import { SECTION_NAMES } from '@/designs/consts';
 import { EditorialSection } from '@/designs/editorial';
 import { KineticSection } from '@/designs/kinetic';
@@ -11,8 +12,12 @@ import type { SectionProps } from '@/designs/types';
 
 vi.mock('next/font/local', () => ({ default: () => ({ className: '', style: {}, variable: '' }) }));
 
-const SHARED_DESIGNS = [
+const OWN_DESIGNS = [
+  ['kinetic', KineticSection],
   ['terminal', TerminalSection],
+] as const;
+
+const SHARED_DESIGNS = [
   ['pop', PopSection],
   ['swiss', SwissSection],
   ['editorial', EditorialSection],
@@ -25,11 +30,15 @@ describe('секция страницы услуги в реестре напр�
     expect(SECTION_NAMES).toContain('servicePage');
   });
 
-  it('Kinetic отдает для servicePage свой компонент, а не общий ServicePage', () => {
-    const element = KineticSection(servicePageProps('landing')) as ReactElement;
+  it.each(OWN_DESIGNS)('%s отдает для servicePage свой компонент, а не общий ServicePage', (design, Section) => {
+    const element = Section(servicePageProps('landing')) as ReactElement;
+    const [, OtherSection] = OWN_DESIGNS.find(([name]) => name !== design)!;
+    const otherType = (OtherSection(servicePageProps('landing')) as ReactElement).type;
 
-    expect(typeof element.type).toBe('function');
     expect(element.type).not.toBe(ServicePage);
+    expect(element.type).not.toBe(ServicePageView);
+    expect(typeof element.type).toBe('function');
+    expect(element.type).not.toBe(otherType);
     expect(element.props).toMatchObject({ service: 'landing' });
   });
 

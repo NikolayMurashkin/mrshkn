@@ -107,57 +107,7 @@
 }
 
 .blockTitle {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.3;
-
-  &::before {
-    content: s.decor('## ');
-    color: var(--accent-ink);
-  }
-}
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 0;
-  padding-top: 16px;
-  border-top: var(--border-width) solid var(--line);
-}
-
-.stepLabel {
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--accent-ink);
-}
-
-.stepTitle {
-  font-family: var(--font-text);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-.stepText {
-  line-height: 1.5;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.block-title;
 }
 
 @media (max-width: 1080px) {
@@ -165,8 +115,7 @@
     display: none;
   }
 
-  .promises,
-  .steps {
+  .promises {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -180,8 +129,7 @@
 }
 
 @media (max-width: 480px) {
-  .promises,
-  .steps {
+  .promises {
     grid-template-columns: minmax(0, 1fr);
   }
 

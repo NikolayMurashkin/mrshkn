@@ -1,10 +1,18 @@
 import { useTranslations } from 'next-intl';
 import { PROCESS_STEPS, PROMISES } from '@/content/process';
 import { PROCESS_KEY_DAYS, PROCESS_SCALE_DAYS } from './consts';
+import { TerminalSteps } from './Steps';
 import styles from './Process.module.scss';
 
 export const TerminalProcess = () => {
   const t = useTranslations('process');
+  const steps = PROCESS_STEPS.map((step, index) => ({
+    id: step.id,
+    day: step.day,
+    label: t('stepLabel', { index: String(index + 1).padStart(2, '0'), day: step.day }),
+    title: t(`steps.${step.id}.title`),
+    text: t(`steps.${step.id}.text`),
+  }));
 
   return (
     <section
@@ -63,24 +71,11 @@ export const TerminalProcess = () => {
           ))}
         </ol>
 
-        <ol
-          className={styles.steps}
-          data-testid="steps"
-        >
-          {PROCESS_STEPS.map((step, index) => (
-            <li
-              className={styles.step}
-              data-day={step.day}
-              key={step.id}
-            >
-              <span className={styles.stepLabel}>
-                {t('stepLabel', { index: String(index + 1).padStart(2, '0'), day: step.day })}
-              </span>
-              <span className={styles.stepTitle}>{t(`steps.${step.id}.title`)}</span>
-              <span className={styles.stepText}>{t(`steps.${step.id}.text`)}</span>
-            </li>
-          ))}
-        </ol>
+        <TerminalSteps
+          steps={steps}
+          testId="steps"
+          titleTag="span"
+        />
       </div>
     </section>
   );

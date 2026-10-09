@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { MoonIcon } from '@/components/icons';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { SERVICES } from '@/content/services';
 import { NAV_ITEMS, WORK_NAV_ITEM } from '../consts';
 import { visibleNavItems } from '../nav';
 import type { HeaderProps } from '../types';
@@ -20,9 +21,14 @@ export const TerminalHeader = ({ hasCases }: HeaderProps) => {
   const onHome = pathname === '/';
   const active = useActiveSection(items, onHome, ANCHOR_OFFSET);
   const onCase = pathname.startsWith(WORK_PATH_PREFIX);
+  const onService = SERVICES.some((service) => pathname === `/${service.slug}`);
 
   const current = (item: string) => {
     if (onCase && item === WORK_NAV_ITEM) {
+      return 'page';
+    }
+
+    if (onService && item === 'services') {
       return 'page';
     }
 

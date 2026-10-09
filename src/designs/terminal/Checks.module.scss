@@ -1,0 +1,28 @@
+@use './shared' as s;
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check {
+  position: relative;
+  padding-left: 30px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  min-width: 0;
+
+  &::before {
+    content: s.decor('[x]');
+    position: absolute;
+    left: 0;
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--ok);
+  }
+}
