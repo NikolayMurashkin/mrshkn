@@ -4,6 +4,7 @@ import { CASE_COVER_SIZES, CASE_SHOT_SIZES } from '@/components/consts';
 import { splitParagraphs } from '@/content/work';
 import { DESIGN_LABELS } from '../consts';
 import type { CaseProps } from '../types';
+import { ArrowLeftIcon, ArrowUpRightIcon } from './icons';
 import styles from './Case.module.scss';
 
 export const PopCase = ({ caseItem }: CaseProps) => {
@@ -25,7 +26,8 @@ export const PopCase = ({ caseItem }: CaseProps) => {
         className={styles.back}
         href={`/${locale}#work`}
       >
-        ← {t('back')}
+        <ArrowLeftIcon />
+        {t('back')}
       </a>
 
       <header className={styles.head}>
@@ -42,6 +44,7 @@ export const PopCase = ({ caseItem }: CaseProps) => {
             rel="noopener noreferrer"
           >
             {t('demoLink')}
+            <ArrowUpRightIcon />
           </a>
         ) : null}
       </header>
@@ -66,14 +69,9 @@ export const PopCase = ({ caseItem }: CaseProps) => {
           >
             {t(id)}
           </h2>
-          <div className={styles.text}>
+          <div className={styles.prose}>
             {paragraphs.map((paragraph, index) => (
-              <p
-                className={styles.paragraph}
-                key={index}
-              >
-                {paragraph}
-              </p>
+              <p key={index}>{paragraph}</p>
             ))}
           </div>
         </section>

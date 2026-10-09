@@ -133,6 +133,64 @@
   font-weight: 800;
 }
 
+[data-design='pop'] .pill {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 15px;
+  transition: transform var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    color: var(--ink);
+    transform: translate(-2px, -2px);
+  }
+
+  svg {
+    display: none;
+  }
+
+  &::before {
+    content: string.unquote("'' / ''");
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    border: var(--border-width) solid var(--ink);
+    border-radius: var(--radius-control);
+    background: var(--accent-alt);
+  }
+}
+
+[data-design='pop'] .menu {
+  bottom: calc(100% + var(--space-12));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 200px;
+  padding: var(--space-8);
+  box-shadow: var(--shadow-surface);
+}
+
+[data-design='pop'] .item,
+[data-design='pop'] .itemActive {
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  &:hover {
+    background: transparent;
+    box-shadow: var(--ring-hover);
+  }
+}
+
+[data-design='pop'] .itemActive {
+  &,
+  &:hover {
+    background: var(--accent-alt);
+    color: var(--ink-on-alt);
+    box-shadow: var(--ring-current);
+  }
+}
+
 [data-design='swiss'] .pill,
 [data-design='swiss'] .menu {
   border-color: var(--ink);

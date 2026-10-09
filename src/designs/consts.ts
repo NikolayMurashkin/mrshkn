@@ -42,3 +42,7 @@ export const DESIGN_DEFAULT_THEME: Record<DesignName, Theme> = {
 export const NAV_ITEMS = ['services', 'work', 'prices', 'contacts'] as const;
 
 export const WORK_NAV_ITEM = 'work';
+
+export const ACTIVE_SECTION_TOLERANCE = 12;
+
+export const PAGE_END_TOLERANCE = 2;

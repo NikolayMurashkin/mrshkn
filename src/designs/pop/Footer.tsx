@@ -1,10 +1,13 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { BRIEF_HREF } from '@/lib/brief/consts';
+import { POP_STUDIO_EMAIL } from './consts';
+import { ArrowRightIcon } from './icons';
 import styles from './Footer.module.scss';
 
 export const PopFooter = () => {
   const t = useTranslations('footer');
+  const brand = useTranslations('brand');
 
   return (
     <footer
@@ -12,15 +15,28 @@ export const PopFooter = () => {
       id="contacts"
     >
       <div className={styles.band}>
-        <p className={styles.heading}>{t('headingQuestion')}</p>
+        <p className={styles.title}>{t('headingQuestion')}</p>
         <div className={styles.aside}>
           <Link
             className={styles.cta}
             href={BRIEF_HREF}
           >
             {t('cta')}
+            <ArrowRightIcon />
           </Link>
           <span className={styles.note}>{t('replyTime')}</span>
+        </div>
+      </div>
+      <div className={styles.bar}>
+        <span
+          className={styles.wordmark}
+          translate="no"
+        >
+          {brand('name')}
+        </span>
+        <div className={styles.links}>
+          <span translate="no">{brand('tagline')}</span>
+          <span translate="no">{POP_STUDIO_EMAIL}</span>
         </div>
       </div>
     </footer>

@@ -1,37 +1,25 @@
+@use './shared' as s;
+
 .pricing {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 40px clamp(20px, 4vw, 56px);
-  overflow: hidden;
+  @include s.section;
 }
 
 .head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 24px;
-  flex-wrap: wrap;
+  @include s.section-head;
 }
 
 .heading {
-  margin: 0;
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
+  @include s.section-title;
 }
 
 .note {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--muted);
+  @include s.note-sticker;
 }
 
 .plans {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  gap: var(--space-32);
   margin: 0;
   padding: 10px 6px;
   list-style: none;
@@ -43,86 +31,105 @@
 }
 
 .card {
+  --tilt: 0deg;
+
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
-  min-height: 250px;
-  padding: 32px 30px;
+  min-height: 270px;
+  padding: var(--space-32) 30px;
   border: var(--border-width-strong) solid var(--ink);
   border-radius: var(--radius-surface);
   background: var(--surface);
-  box-shadow: var(--shadow-surface);
   color: var(--ink);
-  transition: transform 0.25s;
+  box-shadow: var(--shadow-surface);
+  transform: rotate(var(--tilt));
+  transition: transform var(--duration-base) var(--ease-spring);
+
+  &:hover,
+  &:focus-visible {
+    transform: rotate(0deg) translateY(-6px);
+
+    .round {
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 .plan:nth-child(4n + 1) .card {
+  --tilt: -2deg;
+
   background: var(--accent);
   color: var(--accent-contrast);
-  transform: rotate(-2deg);
 }
 
 .plan:nth-child(4n + 2) .card {
+  --tilt: 1.5deg;
+
   background: var(--accent-alt);
   color: var(--ink-on-alt);
-  transform: rotate(1.5deg);
 }
 
 .plan:nth-child(4n + 3) .card {
+  --tilt: -1deg;
+
   background: var(--accent-warm);
   color: var(--ink-on-alt);
-  transform: rotate(-1deg);
 }
 
 .plan:nth-child(4n) .card {
-  transform: rotate(2deg);
-}
-
-.plan .card:hover {
-  transform: rotate(0deg) translateY(-6px);
+  --tilt: 2deg;
 }
 
 .tag {
-  align-self: flex-start;
-  padding: 6px 12px;
-  border: var(--border-width) solid currentcolor;
-  border-radius: var(--radius-control);
-  font-size: 13px;
-  font-weight: 700;
+  @include s.tag;
 }
 
 .name {
-  font-size: clamp(22px, 2.4vw, 32px);
+  font-size: clamp(24px, 2.4vw, 32px);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.01em;
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
 }
 
 .summary {
   font-size: 15px;
   font-weight: 500;
   line-height: 1.45;
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
+}
+
+.foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-16);
+  margin-top: auto;
 }
 
 .price {
-  margin-top: auto;
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 900;
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   min-width: 0;
 }
 
-.miniApp {
+.round {
+  @include s.round;
+}
+
+.callout {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 28px clamp(22px, 3vw, 36px);
+  padding: 28px clamp(22px, 14vw, 200px) 28px clamp(22px, 3vw, 40px);
   border: var(--border-width-strong) solid var(--ink);
   border-radius: var(--radius-band);
   background: var(--accent);
@@ -130,52 +137,116 @@
   box-shadow: var(--shadow-band);
 }
 
-.miniAppTitle {
+.calloutTitle {
   margin: 0;
-  font-size: clamp(20px, 2.4vw, 28px);
+  font-size: clamp(22px, 2.6vw, 32px);
   font-weight: 900;
+  line-height: 1.1;
+
+  @include s.wrap;
 }
 
-.miniAppText {
+.calloutText {
   margin: 0;
   max-width: 720px;
-  font-weight: 500;
   line-height: 1.5;
-  overflow-wrap: anywhere;
-  min-width: 0;
+  color: var(--accent-contrast-soft);
+
+  @include s.wrap;
 }
 
-.included,
-.optionsBlock,
-.extrasBlock {
+.calloutStar {
+  @include s.star;
+
+  position: absolute;
+  top: 50%;
+  right: clamp(16px, 4vw, 56px);
+  transform: translateY(-50%) rotate(-12deg);
+}
+
+.block {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-24);
+  min-width: 0;
 }
 
 .blockHead {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 24px;
+  gap: var(--space-8) var(--space-24);
+}
+
+.blockTitle {
+  margin: 0;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+
+  @include s.wrap;
 }
 
 .blockNote {
   margin: 0;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
 }
 
 .groups {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-20);
 }
 
-.groupItems {
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--space-24) 22px;
+  border: var(--border-width-strong) solid var(--ink);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+  box-shadow: var(--shadow-floating);
+  min-width: 0;
+}
+
+.groupTitle {
+  align-self: flex-start;
+  margin: 0;
+  padding: 5px 14px;
+  border: var(--border-width) solid var(--ink);
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  @include s.wrap;
+}
+
+.group:nth-child(4n + 2) .groupTitle {
+  @include s.tone(1);
+}
+
+.group:nth-child(4n + 3) .groupTitle {
+  @include s.tone(2);
+}
+
+.group:nth-child(4n) .groupTitle {
+  @include s.tone(4);
+}
+
+.checks {
   display: flex;
   flex-direction: column;
   gap: 11px;
@@ -184,145 +255,98 @@
   list-style: none;
 }
 
-.options {
+.check {
+  @include s.stamp-check(var(--accent-ink));
+
+  font-weight: 500;
+  line-height: 1.4;
+
+  @include s.wrap;
+}
+
+.pricelist {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(7, auto);
-  grid-auto-flow: column;
-  column-gap: 32px;
+  column-gap: var(--space-40);
   margin: 0;
-  padding: 0;
-  list-style: none;
-  padding: 8px 12px;
+  padding: var(--space-12) var(--space-32);
+  border: var(--border-width-strong) solid var(--ink);
+  border-radius: var(--radius-band);
   background: var(--surface);
-  border: var(--border-width) solid var(--ink);
-  border-radius: var(--radius-surface);
   box-shadow: var(--shadow-surface);
+  list-style: none;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto minmax(24px, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-4) var(--space-8);
+  padding: 14px 0;
+  border-bottom: var(--border-width) solid var(--line);
+  min-width: 0;
+}
+
+.optionName {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.35;
+
+  @include s.wrap;
+}
+
+.optionDots {
+  align-self: end;
+  margin-bottom: 6px;
+  border-bottom: var(--border-width) dotted var(--muted);
+}
+
+.optionPrice {
+  font-size: 16px;
+  font-weight: 900;
+  white-space: nowrap;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.optionNote {
+  grid-column: 1 / 3;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.optionMonthly {
+  grid-column: 3;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .extras {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-24);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.blockTitle {
-  margin: 0;
-  font-size: clamp(20px, 2.2vw, 26px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 22px;
-  min-width: 0;
-  background: var(--surface);
-  border: var(--border-width) solid var(--ink);
-  border-radius: var(--radius-surface);
-  box-shadow: var(--shadow-floating);
-}
-
-.groupTitle {
-  align-self: flex-start;
-  margin: 0;
-  padding: 5px 14px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--accent-contrast);
-  background: var(--accent);
-  border-radius: var(--radius-control);
-}
-
-.basic {
-  position: relative;
-  padding-left: 28px;
-  font-weight: 500;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-.basic::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  font-weight: 800;
-  color: var(--accent-ink);
-}
-
-.option {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 2px 20px;
-  padding: 12px 16px;
-}
-
-.option + .option {
-  border-top: var(--border-width) solid var(--line);
-}
-
-.optionName {
-  grid-column: 1;
-  grid-row: 1;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-.optionNote {
-  grid-column: 1;
-  grid-row: 2;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-.optionPrice {
-  grid-column: 2;
-  grid-row: 1;
-  font-size: 16px;
-  font-weight: 800;
-  text-align: right;
-  white-space: nowrap;
-  color: var(--accent-ink);
-  font-variant-numeric: tabular-nums;
-}
-
-.optionMonthly {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: right;
-  white-space: nowrap;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 .extra {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 24px 26px;
-  min-width: 0;
-  background: var(--surface);
-  border: var(--border-width) solid var(--ink);
+  gap: var(--space-12);
+  padding: var(--space-24) 26px;
+  border: var(--border-width-strong) solid var(--ink);
   border-radius: var(--radius-surface);
+  background: var(--surface);
   box-shadow: var(--shadow-surface);
+  min-width: 0;
 }
 
 .extraHead {
@@ -330,17 +354,19 @@
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 4px 20px;
+  gap: var(--space-4) var(--space-20);
 }
 
 .extraName {
   margin: 0;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 900;
+
+  @include s.wrap;
 }
 
 .extraPrice {
-  font-size: 26px;
+  font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 900;
   white-space: nowrap;
   color: var(--accent-ink);
@@ -349,54 +375,66 @@
 
 .extraSummary {
   margin: 0;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
 }
 
-@media (max-width: 1100px) {
-  .plans {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 900px) {
-  .groups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .options,
-  .extras {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto;
-    grid-auto-flow: row;
-  }
-}
-
-@media (max-width: 700px) {
+@media (max-width: 1080px) {
   .plans,
   .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricelist {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
+  .pricing {
+    gap: var(--space-40);
+  }
+
+  .plans,
+  .extras {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .callout {
+    padding-right: clamp(22px, 3vw, 40px);
+  }
+
+  .calloutStar {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pricelist {
+    padding: var(--space-8) var(--space-20);
+    border-radius: var(--radius-surface);
+  }
+
   .option {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2px;
+  }
+
+  .optionDots {
+    display: none;
   }
 
   .optionPrice,
-  .optionMonthly {
+  .optionMonthly,
+  .optionNote {
     grid-column: 1;
     text-align: left;
-  }
-
-  .optionPrice {
-    grid-row: 2;
   }
 
   .optionMonthly {
@@ -405,11 +443,5 @@
 
   .optionNote {
     grid-row: 4;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card {
-    transition: none;
   }
 }

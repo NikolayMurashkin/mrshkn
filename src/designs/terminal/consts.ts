@@ -13,11 +13,7 @@ export const TERMINAL_LOG_LINES: TerminalLogLine[] = [
 
 export const ANCHOR_OFFSET = 88;
 
-export const ACTIVE_SECTION_TOLERANCE = 12;
-
 export const WORK_PATH_PREFIX = '/work/';
-
-export const PAGE_END_TOLERANCE = 2;
 
 export const PROCESS_SCALE_DAYS = Array.from({ length: 14 }, (_, index) => index + 1);
 

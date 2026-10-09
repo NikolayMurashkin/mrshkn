@@ -8,8 +8,8 @@ import { visibleNavItems } from '../nav';
 import type { HeaderProps } from '../types';
 import { Link, usePathname } from '@/i18n/navigation';
 import { BRIEF_HREF } from '@/lib/brief/consts';
-import { WORK_PATH_PREFIX } from './consts';
-import { useActiveSection } from './use-active-section';
+import { useActiveSection } from '../use-active-section';
+import { ANCHOR_OFFSET, WORK_PATH_PREFIX } from './consts';
 import styles from './Header.module.scss';
 
 export const TerminalHeader = ({ hasCases }: HeaderProps) => {
@@ -18,7 +18,7 @@ export const TerminalHeader = ({ hasCases }: HeaderProps) => {
   const pathname = usePathname();
   const items = useMemo(() => visibleNavItems(NAV_ITEMS, hasCases), [hasCases]);
   const onHome = pathname === '/';
-  const active = useActiveSection(items, onHome);
+  const active = useActiveSection(items, onHome, ANCHOR_OFFSET);
   const onCase = pathname.startsWith(WORK_PATH_PREFIX);
 
   const current = (item: string) => {

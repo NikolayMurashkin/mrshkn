@@ -5,6 +5,7 @@ import { CARD_METRICS_LIMIT, caseHref } from '@/content/work';
 import { Link } from '@/i18n/navigation';
 import { DESIGN_LABELS } from '../consts';
 import type { WorksProps } from '../types';
+import { ArrowUpRightIcon } from './icons';
 import styles from './Works.module.scss';
 
 export const PopWorks = ({ cases }: WorksProps) => {
@@ -78,6 +79,7 @@ export const PopWorks = ({ cases }: WorksProps) => {
                   rel="noopener noreferrer"
                 >
                   {t('demoLink')}
+                  <ArrowUpRightIcon />
                 </a>
               ) : null}
             </div>

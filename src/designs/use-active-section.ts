@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ACTIVE_SECTION_TOLERANCE, ANCHOR_OFFSET, PAGE_END_TOLERANCE } from './consts';
+import { ACTIVE_SECTION_TOLERANCE, PAGE_END_TOLERANCE } from './consts';
 
-export const useActiveSection = (ids: readonly string[], enabled: boolean) => {
+/**
+ * Активный пункт меню — секция с наибольшим `top` среди дошедших до линии под липкой шапкой (`offset` — высота шапки
+ * направления); в конце страницы — последний id. Из вложенных секций (`#services` содержит `#prices`) побеждает
+ * та, что начинается позже.
+ */
+export const useActiveSection = (ids: readonly string[], enabled: boolean, offset: number) => {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,7 +25,7 @@ export const useActiveSection = (ids: readonly string[], enabled: boolean) => {
       if (atEnd) {
         next = ids[ids.length - 1] ?? null;
       } else {
-        const line = ANCHOR_OFFSET + ACTIVE_SECTION_TOLERANCE;
+        const line = offset + ACTIVE_SECTION_TOLERANCE;
         let nearest = -Infinity;
 
         for (const id of ids) {
@@ -44,6 +49,7 @@ export const useActiveSection = (ids: readonly string[], enabled: boolean) => {
 
     update();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
       if (frame) {
@@ -51,8 +57,9 @@ export const useActiveSection = (ids: readonly string[], enabled: boolean) => {
       }
 
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
-  }, [ids, enabled]);
+  }, [ids, enabled, offset]);
 
   return enabled ? active : null;
 };

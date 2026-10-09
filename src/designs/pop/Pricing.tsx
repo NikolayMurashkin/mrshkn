@@ -3,6 +3,7 @@ import { planPath } from '@/content/format';
 import { PRICING_BASIC_GROUPS, PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
 import { usePriceText } from '@/content/use-price';
 import { Link } from '@/i18n/navigation';
+import { ArrowUpRightIcon, StarIcon } from './icons';
 import styles from './Pricing.module.scss';
 
 export const PopPricing = () => {
@@ -44,21 +45,33 @@ export const PopPricing = () => {
               <span className={styles.tag}>{t(`plans.${plan.id}.term`)}</span>
               <span className={styles.name}>{t(`plans.${plan.id}.name`)}</span>
               <span className={styles.summary}>{t(`plans.${plan.id}.summary`)}</span>
-              <span className={styles.price}>{price.plan(plan)}</span>
+              <span className={styles.foot}>
+                <span className={styles.price}>{price.plan(plan)}</span>
+                <span
+                  className={styles.round}
+                  aria-hidden="true"
+                >
+                  <ArrowUpRightIcon />
+                </span>
+              </span>
             </Link>
           </li>
         ))}
       </ul>
 
       <div
-        className={styles.miniApp}
+        className={styles.callout}
         data-testid="mini-app-note"
       >
-        <p className={styles.miniAppTitle}>{t('miniAppNote.title')}</p>
-        <p className={styles.miniAppText}>{t('miniAppNote.text')}</p>
+        <p className={styles.calloutTitle}>{t('miniAppNote.title')}</p>
+        <p className={styles.calloutText}>{t('miniAppNote.text')}</p>
+        <StarIcon
+          className={styles.calloutStar}
+          size={96}
+        />
       </div>
 
-      <div className={styles.included}>
+      <div className={styles.block}>
         <div className={styles.blockHead}>
           <h3 className={styles.blockTitle}>{t('basicsHeading')}</h3>
           <p className={styles.blockNote}>{t('basicsNote')}</p>
@@ -74,10 +87,10 @@ export const PopPricing = () => {
               key={group.id}
             >
               <h4 className={styles.groupTitle}>{t(`basicsGroups.${group.id}`)}</h4>
-              <ul className={styles.groupItems}>
+              <ul className={styles.checks}>
                 {group.items.map((item) => (
                   <li
-                    className={styles.basic}
+                    className={styles.check}
                     key={item}
                   >
                     {t(`basics.${item}`)}
@@ -89,13 +102,13 @@ export const PopPricing = () => {
         </div>
       </div>
 
-      <div className={styles.optionsBlock}>
+      <div className={styles.block}>
         <div className={styles.blockHead}>
           <h3 className={styles.blockTitle}>{t('optionsHeading')}</h3>
           <p className={styles.blockNote}>{t('optionsNote')}</p>
         </div>
         <ul
-          className={styles.options}
+          className={styles.pricelist}
           data-testid="options"
         >
           {PRICING_OPTIONS.map((option) => {
@@ -107,6 +120,10 @@ export const PopPricing = () => {
                 key={option.id}
               >
                 <span className={styles.optionName}>{t(`options.${option.id}.name`)}</span>
+                <span
+                  className={styles.optionDots}
+                  aria-hidden="true"
+                />
                 <span
                   className={styles.optionPrice}
                   data-testid="option-price"
@@ -121,7 +138,7 @@ export const PopPricing = () => {
         </ul>
       </div>
 
-      <div className={styles.extrasBlock}>
+      <div className={styles.block}>
         <div className={styles.blockHead}>
           <h3 className={styles.blockTitle}>{t('extrasHeading')}</h3>
           <p className={styles.blockNote}>{t('extrasNote')}</p>

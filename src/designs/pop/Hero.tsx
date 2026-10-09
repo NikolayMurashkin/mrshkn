@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl';
-import { POP_STICKERS } from './consts';
 import { Link } from '@/i18n/navigation';
 import { BRIEF_HREF } from '@/lib/brief/consts';
+import { POP_STICKERS } from './consts';
+import { ArrowRightIcon, StarIcon } from './icons';
 import styles from './Hero.module.scss';
 
 const STICKER_CLASSES: Record<(typeof POP_STICKERS)[number], string> = {
@@ -27,23 +28,11 @@ export const PopHero = () => {
         </p>
         <div className={styles.actions}>
           <Link
-            className={`${styles.button} ${styles.buttonPrimary}`}
+            className={`${styles.button} ${styles.primary}`}
             href={BRIEF_HREF}
           >
             {t('pop.primaryCta')}
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
+            <ArrowRightIcon />
           </Link>
           <a
             className={styles.button}
@@ -62,19 +51,7 @@ export const PopHero = () => {
             {t.rich(`pop.stickers.${sticker}`, { br: () => <br /> })}
           </div>
         ))}
-        <svg
-          className={styles.star}
-          width="70"
-          height="70"
-          viewBox="0 0 24 24"
-          fill="var(--accent-alt)"
-          stroke="var(--ink)"
-          strokeWidth="1.2"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M12 2l2.4 6.6L21 9.3l-5.2 4.3 1.7 6.9L12 16.9l-5.5 3.6 1.7-6.9L3 9.3l6.6-.7z" />
-        </svg>
+        <StarIcon className={styles.star} />
       </div>
     </section>
   );
