@@ -1,0 +1,97 @@
+@use './shared' as s;
+
+.thanks {
+  @include s.grid;
+
+  margin: 0 var(--s-gutter);
+  padding: 72px 0 var(--space-24);
+}
+
+.aside {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.progress {
+  @include s.progress;
+
+  li {
+    animation: draw var(--duration-reveal) var(--ease-out) both;
+
+    @for $i from 2 through 5 {
+      &:nth-child(#{$i}) {
+        animation-delay: calc(var(--duration-stagger) * #{($i - 1) * 2});
+      }
+    }
+  }
+}
+
+.count {
+  @include s.count;
+}
+
+.main {
+  grid-column: 4 / span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+  min-width: 0;
+}
+
+.title {
+  @include s.title;
+
+  width: 100%;
+}
+
+.lead {
+  @include s.lead;
+
+  width: 100%;
+}
+
+.note {
+  width: 100%;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.button {
+  @include s.button;
+  @include s.button-large;
+  @include s.button-primary;
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .aside,
+  .main {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    @include s.button-fluid(64px);
+
+    justify-content: space-between;
+    width: 100%;
+  }
+}

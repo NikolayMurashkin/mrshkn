@@ -3,6 +3,8 @@ import { planPath } from '@/content/format';
 import { PRICING_BASIC_GROUPS, PRICING_EXTRAS, PRICING_OPTIONS, PRICING_PLANS } from '@/content/pricing';
 import { usePriceText } from '@/content/use-price';
 import { Link } from '@/i18n/navigation';
+import { SWISS_COUNT_DIGITS } from './consts';
+import { ArrowRightIcon } from './icons';
 import styles from './Pricing.module.scss';
 
 export const SwissPricing = () => {
@@ -16,50 +18,66 @@ export const SwissPricing = () => {
       data-testid="pricing"
       aria-labelledby="pricing-heading"
     >
-      <div className={styles.aside}>
-        <span className={styles.mark}>{t('sectionMark')}</span>
-        <h2
-          className={styles.heading}
-          id="pricing-heading"
-        >
-          {t('heading')}
-        </h2>
-        <p className={styles.note}>{t('note')}</p>
+      <div className={styles.head}>
+        <div className={styles.aside}>
+          <span
+            className={styles.index}
+            aria-hidden="true"
+          />
+          <span className={styles.mark}>{t('sectionMark')}</span>
+        </div>
+        <div className={styles.titleColumn}>
+          <h2
+            className={styles.heading}
+            id="pricing-heading"
+          >
+            {t('heading')}
+          </h2>
+          <p className={styles.note}>{t('note')}</p>
+        </div>
       </div>
 
-      <div className={styles.main}>
-        <div className={styles.columns}>
-          <span>{t('columns.number')}</span>
-          <span>{t('columns.product')}</span>
-          <span>{t('columns.inside')}</span>
-          <span>{t('columns.term')}</span>
-          <span className={styles.columnPrice}>{t('columns.price')}</span>
-        </div>
+      <div className={styles.body}>
+        <div id="prices">
+          <div
+            className={styles.columns}
+            aria-hidden="true"
+          >
+            <span>{t('columns.number')}</span>
+            <span>{t('columns.product')}</span>
+            <span>{t('columns.inside')}</span>
+            <span>{t('columns.term')}</span>
+            <span className={styles.columnPrice}>{t('columns.price')}</span>
+          </div>
 
-        <ul
-          className={styles.plans}
-          id="prices"
-        >
-          {PRICING_PLANS.map((plan, index) => (
-            <li
-              className={styles.plan}
-              data-testid={`plan-${plan.id}`}
-              key={plan.id}
-            >
-              <Link
-                className={styles.planLink}
-                href={planPath(plan)}
-                aria-label={t('planLink', { name: t(`plans.${plan.id}.name`) })}
+          <ul className={styles.plans}>
+            {PRICING_PLANS.map((plan, index) => (
+              <li
+                className={styles.plan}
+                data-testid={`plan-${plan.id}`}
+                key={plan.id}
               >
-                <span className={styles.index}>{String(index + 1).padStart(2, '0')}</span>
-                <span className={styles.name}>{t(`plans.${plan.id}.name`)}</span>
-                <span className={styles.summary}>{t(`plans.${plan.id}.summary`)}</span>
-                <span className={styles.term}>{t(`plans.${plan.id}.term`)}</span>
-                <span className={styles.price}>{price.plan(plan)}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                <Link
+                  className={styles.planLink}
+                  href={planPath(plan)}
+                  aria-label={t('planLink', { name: t(`plans.${plan.id}.name`) })}
+                >
+                  <span className={styles.number}>{String(index + 1).padStart(SWISS_COUNT_DIGITS, '0')}</span>
+                  <span className={styles.name}>{t(`plans.${plan.id}.name`)}</span>
+                  <span className={styles.summary}>{t(`plans.${plan.id}.summary`)}</span>
+                  <span className={styles.term}>{t(`plans.${plan.id}.term`)}</span>
+                  <span className={styles.price}>{price.plan(plan)}</span>
+                  <span
+                    className={styles.arrow}
+                    aria-hidden="true"
+                  >
+                    <ArrowRightIcon />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div
           className={styles.miniApp}
@@ -69,7 +87,7 @@ export const SwissPricing = () => {
           <p className={styles.miniAppText}>{t('miniAppNote.text')}</p>
         </div>
 
-        <div className={styles.included}>
+        <div className={styles.block}>
           <div className={styles.blockHead}>
             <h3 className={styles.blockTitle}>{t('basicsHeading')}</h3>
             <p className={styles.blockNote}>{t('basicsNote')}</p>
@@ -85,14 +103,9 @@ export const SwissPricing = () => {
                 key={group.id}
               >
                 <h4 className={styles.groupTitle}>{t(`basicsGroups.${group.id}`)}</h4>
-                <ul className={styles.groupItems}>
+                <ul className={styles.checks}>
                   {group.items.map((item) => (
-                    <li
-                      className={styles.basic}
-                      key={item}
-                    >
-                      {t(`basics.${item}`)}
-                    </li>
+                    <li key={item}>{t(`basics.${item}`)}</li>
                   ))}
                 </ul>
               </div>
@@ -100,7 +113,7 @@ export const SwissPricing = () => {
           </div>
         </div>
 
-        <div className={styles.optionsBlock}>
+        <div className={styles.block}>
           <div className={styles.blockHead}>
             <h3 className={styles.blockTitle}>{t('optionsHeading')}</h3>
             <p className={styles.blockNote}>{t('optionsNote')}</p>
@@ -132,7 +145,7 @@ export const SwissPricing = () => {
           </ul>
         </div>
 
-        <div className={styles.extrasBlock}>
+        <div className={styles.block}>
           <div className={styles.blockHead}>
             <h3 className={styles.blockTitle}>{t('extrasHeading')}</h3>
             <p className={styles.blockNote}>{t('extrasNote')}</p>
@@ -146,10 +159,8 @@ export const SwissPricing = () => {
                 className={styles.extra}
                 key={extra.id}
               >
-                <div className={styles.extraHead}>
-                  <h4 className={styles.extraName}>{t(`extras.${extra.id}.name`)}</h4>
-                  <span className={styles.extraPrice}>{price.extra(extra)}</span>
-                </div>
+                <h4 className={styles.extraName}>{t(`extras.${extra.id}.name`)}</h4>
+                <span className={styles.extraPrice}>{price.extra(extra)}</span>
                 <p className={styles.extraSummary}>{t(`extras.${extra.id}.summary`)}</p>
               </li>
             ))}

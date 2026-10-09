@@ -1,48 +1,42 @@
+@use './shared' as s;
+
 .works {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 24px;
-  margin: 0 clamp(20px, 4.5vw, 64px);
-  padding-bottom: 80px;
+  @include s.section;
+}
+
+.head {
+  @include s.section-head;
 }
 
 .aside {
-  grid-column: span 3;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0;
+  @include s.aside;
+}
+
+.index {
+  @include s.index;
 }
 
 .mark {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  @include s.kicker;
+}
+
+.titleColumn {
+  @include s.section-title-column;
 }
 
 .heading {
-  margin: 0;
-  font-size: clamp(22px, 2.4vw, 28px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.title;
 }
 
 .note {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--muted);
+  @include s.note;
 }
 
 .list {
-  grid-column: 4 / span 9;
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-24);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -53,17 +47,21 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding-top: 14px;
-  border-top: var(--border-width) solid var(--ink);
+  gap: var(--space-16);
   min-width: 0;
+}
+
+.coverFrame {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-soft);
 }
 
 .cover {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -71,46 +69,60 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: var(--space-12);
+  border-top: var(--border-width) solid var(--ink);
   min-width: 0;
 }
 
-.kind {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+.tag {
+  @include s.tag;
+}
+
+.tagSolid {
+  background: var(--ink);
+  color: var(--ink-inverse);
 }
 
 .title {
-  margin: 0;
-  font-size: clamp(18px, 1.8vw, 22px);
-  font-weight: 700;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.card-title;
+
+  width: 100%;
 }
 
-.link::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+.link {
+  text-decoration-thickness: var(--border-width-strong);
+  text-underline-offset: 5px;
+  transition: color var(--duration-fast) var(--ease-in-out);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.card:hover .link,
+.link:focus-visible {
+  color: var(--accent-ink);
+  text-decoration-line: underline;
 }
 
 .meta {
+  width: 100%;
   font-size: 14px;
-  font-weight: 300;
   color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
 }
 
 .metrics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 24px;
-  margin: 4px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-16);
+  width: 100%;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -118,42 +130,39 @@
 .metric {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-4);
   min-width: 0;
 }
 
 .metricValue {
+  font-size: 28px;
   font-weight: 700;
-  font-size: 22px;
-  color: var(--accent-ink);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+
+  @include s.wrap;
 }
 
 .metricLabel {
-  font-size: 12px;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.kicker;
 }
 
 .demo {
+  @include s.arrow-link;
+
   position: relative;
-  align-self: flex-start;
+  z-index: 1;
   margin-top: auto;
-  font-size: 15px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
-@media (max-width: 1000px) {
-  .aside,
+@media (max-width: 1080px) {
   .list {
-    grid-column: span 12;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .list {
     grid-template-columns: minmax(0, 1fr);
   }

@@ -4,6 +4,7 @@ import { CASE_COVER_SIZES, CASE_SHOT_SIZES } from '@/components/consts';
 import { splitParagraphs } from '@/content/work';
 import { DESIGN_LABELS } from '../consts';
 import type { CaseProps } from '../types';
+import { ArrowLeftIcon, ArrowUpRightIcon } from './icons';
 import styles from './Case.module.scss';
 
 export const SwissCase = ({ caseItem }: CaseProps) => {
@@ -25,25 +26,33 @@ export const SwissCase = ({ caseItem }: CaseProps) => {
         className={styles.back}
         href={`/${locale}#work`}
       >
-        ← {t('back')}
+        <ArrowLeftIcon />
+        {t('back')}
       </a>
 
       <header className={styles.head}>
-        <span className={styles.kind}>{t(`kind.${kind}`)}</span>
-        <h1 className={styles.title}>{title}</h1>
-        <p className={styles.meta}>
-          {niches(niche)} · {t('design', { design: DESIGN_LABELS[design] })}
-        </p>
-        {demoUrl ? (
-          <a
-            className={styles.demo}
-            href={demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('demoLink')}
-          </a>
-        ) : null}
+        <div className={styles.aside}>
+          <span className={kind === 'client' ? `${styles.tag} ${styles.tagSolid}` : styles.tag}>
+            {t(`kind.${kind}`)}
+          </span>
+          <p className={styles.meta}>
+            {niches(niche)} · {t('design', { design: DESIGN_LABELS[design] })}
+          </p>
+        </div>
+        <div className={styles.main}>
+          <h1 className={styles.title}>{title}</h1>
+          {demoUrl ? (
+            <a
+              className={styles.demo}
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('demoLink')}
+              <ArrowUpRightIcon />
+            </a>
+          ) : null}
+        </div>
       </header>
 
       <CaseImage
@@ -66,7 +75,7 @@ export const SwissCase = ({ caseItem }: CaseProps) => {
           >
             {t(id)}
           </h2>
-          <div className={styles.text}>
+          <div className={styles.prose}>
             {paragraphs.map((paragraph, index) => (
               <p
                 className={styles.paragraph}

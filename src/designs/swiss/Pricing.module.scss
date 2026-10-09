@@ -1,61 +1,79 @@
+@use './shared' as s;
+
 .pricing {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 24px;
-  margin: 0 clamp(20px, 4.5vw, 64px);
-  padding-bottom: 72px;
+  @include s.section;
+}
+
+.head {
+  @include s.section-head;
 }
 
 .aside {
-  grid-column: span 3;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0;
+  @include s.aside;
+}
+
+.index {
+  @include s.index;
 }
 
 .mark {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  @include s.kicker;
+}
+
+.titleColumn {
+  @include s.section-title-column;
 }
 
 .heading {
-  margin: 0;
-  font-size: clamp(22px, 2.4vw, 28px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.title;
 }
 
 .note {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--muted);
+  @include s.note;
 }
 
-.main {
-  grid-column: 4 / span 9;
+.body {
+  @include s.main-column;
+
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  min-width: 0;
+  gap: var(--space-72);
+}
+
+.columns,
+.planLink {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.3fr) 130px 170px 40px;
+  grid-template-areas: 'idx name sum term price arrow';
+  column-gap: var(--space-24);
+  align-items: center;
 }
 
 .columns {
-  display: grid;
-  grid-template-columns: 60px minmax(0, 1fr) minmax(0, 1fr) 140px 190px;
-  gap: 24px;
-  padding-bottom: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  @include s.kicker;
+
+  padding-bottom: var(--space-12);
+  border-bottom: var(--border-width) solid var(--ink);
+
+  > :nth-child(1) {
+    grid-area: idx;
+  }
+
+  > :nth-child(2) {
+    grid-area: name;
+  }
+
+  > :nth-child(3) {
+    grid-area: sum;
+  }
+
+  > :nth-child(4) {
+    grid-area: term;
+  }
+
+  > :nth-child(5) {
+    grid-area: price;
+  }
 }
 
 .columnPrice {
@@ -66,382 +84,384 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  border-bottom: var(--border-width) solid var(--ink);
 }
 
-.plan {
+.plan + .plan {
   border-top: var(--border-width) solid var(--line);
 }
 
-.plan:last-child {
-  border-bottom: var(--border-width) solid var(--line);
-}
-
 .planLink {
-  display: grid;
-  grid-template-columns: 60px minmax(0, 1fr) minmax(0, 1fr) 140px 190px;
-  gap: 24px;
-  align-items: baseline;
-  padding: 22px 0;
+  position: relative;
+  isolation: isolate;
+  row-gap: 6px;
+  padding: var(--space-24) 0;
   color: var(--ink);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 calc(-1 * var(--space-12));
+    z-index: -1;
+    background: var(--surface-soft);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-base) var(--ease-in-out);
+  }
+
+  &:hover,
+  &:focus-visible {
+    &::before {
+      transform: none;
+    }
+
+    .name {
+      color: var(--accent-ink);
+    }
+
+    .arrow {
+      @include s.cell-arrow-active;
+    }
+  }
 }
 
-.planLink:hover .name {
-  color: var(--accent-ink);
-}
-
-.index {
+.number {
+  grid-area: idx;
   font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.12em;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .name {
-  font-size: clamp(20px, 2vw, 26px);
+  grid-area: name;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 28px);
   font-weight: 700;
+  line-height: 1.1;
   letter-spacing: -0.02em;
-  overflow-wrap: anywhere;
-  min-width: 0;
+  transition: color var(--duration-fast) var(--ease-in-out);
+
+  @include s.wrap;
 }
 
 .summary {
+  grid-area: sum;
   font-size: 15px;
-  font-weight: 300;
   line-height: 1.45;
   color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
 }
 
 .term {
+  grid-area: term;
   font-size: 15px;
-  font-weight: 300;
+
+  @include s.wrap;
 }
 
 .price {
-  font-size: 20px;
+  grid-area: price;
+  font-size: 22px;
   font-weight: 500;
+  line-height: 1.2;
   text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
+.arrow {
+  @include s.cell-arrow;
+
+  grid-area: arrow;
+}
+
 .miniApp {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 24px 28px;
-  border-left: var(--border-width-strong) solid var(--accent);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--space-24);
+  padding: var(--space-32);
   background: var(--surface-soft);
 }
 
 .miniAppTitle {
   margin: 0;
   font-size: 19px;
-  font-weight: 500;
+  font-weight: 700;
+  line-height: 1.25;
+
+  @include s.wrap;
 }
 
 .miniAppText {
   margin: 0;
-  max-width: 720px;
-  font-weight: 300;
+  font-size: 15px;
   line-height: 1.5;
-  overflow-wrap: anywhere;
-  min-width: 0;
+  color: var(--muted);
+
+  @include s.wrap;
 }
 
-.included,
-.optionsBlock,
-.extrasBlock {
+.block {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-24);
+  min-width: 0;
 }
 
 .blockHead {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 24px;
-  padding-bottom: 10px;
+  gap: var(--space-8) var(--space-24);
+  padding-bottom: var(--space-12);
   border-bottom: var(--border-width) solid var(--ink);
-}
-
-.blockNote {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-.groups {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 32px;
-  counter-reset: group;
-}
-
-.groupItems {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(7, auto);
-  grid-auto-flow: column;
-  column-gap: 48px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.extras {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .blockTitle {
   margin: 0;
   font-size: 13px;
   font-weight: 500;
+  line-height: 1.3;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+
+  @include s.wrap;
+}
+
+.blockNote {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-24);
+  counter-reset: swiss-group;
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 12px;
-  min-width: 0;
-  counter-increment: group;
+  gap: var(--space-12);
+  padding-top: var(--space-12);
   border-top: var(--border-width) solid var(--ink);
+  counter-increment: swiss-group;
+  min-width: 0;
 }
 
 .groupTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin: 0;
   font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.25;
+
+  @include s.wrap;
+
+  &::before {
+    content: counter(swiss-group, decimal-leading-zero);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
 }
 
-.groupTitle::before {
-  content: '0' counter(group);
-  display: block;
-  margin-bottom: 8px;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: var(--accent-ink);
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 14.5px;
+    line-height: 1.45;
+
+    @include s.wrap;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.72em;
+      left: 0;
+      width: 10px;
+      height: var(--border-width-strong);
+      background: var(--ink);
+    }
+  }
 }
 
-.basic {
-  font-size: 14.5px;
-  font-weight: 300;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-  min-width: 0;
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 2px 20px;
-  padding: 11px 0 12px;
-  border-top: var(--border-width) solid var(--line);
+  gap: var(--space-4) var(--space-16);
+  padding: 14px 0;
+  border-bottom: var(--border-width) solid var(--line);
+  min-width: 0;
 }
 
 .optionName {
-  grid-column: 1;
-  grid-row: 1;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.35;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
 
-.optionNote {
-  grid-column: 1;
-  grid-row: 2;
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 1.4;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.wrap;
 }
 
 .optionPrice {
-  grid-column: 2;
-  grid-row: 1;
   font-size: 15px;
   font-weight: 500;
+  line-height: 1.35;
   text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
+}
+
+.optionNote,
+.optionMonthly {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+
+  @include s.wrap;
 }
 
 .optionMonthly {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 13px;
-  font-weight: 400;
-  text-align: right;
-  white-space: nowrap;
-  color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
-.extra {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 12px;
-  min-width: 0;
-  border-top: var(--border-width) solid var(--ink);
+.extras {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.extraHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 20px;
+.extra {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-8) var(--space-16);
+  padding-top: var(--space-12);
+  border-top: var(--border-width) solid var(--ink);
+  min-width: 0;
 }
 
 .extraName {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  @include s.wrap;
 }
 
 .extraPrice {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
+  line-height: 1.2;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
 .extraSummary {
+  grid-column: 1 / -1;
   margin: 0;
   font-size: 14px;
-  font-weight: 300;
   line-height: 1.5;
   color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+
+  @include s.wrap;
 }
 
-@media (max-width: 1000px) {
-  .aside,
-  .main {
-    grid-column: span 12;
+@media (max-width: 1080px) {
+  .columns,
+  .planLink {
+    grid-template-columns: 56px minmax(0, 1fr) 120px 150px 40px;
+    grid-template-areas:
+      'idx name term price arrow'
+      'idx sum term price arrow';
   }
 
-  .index {
+  .columns > :nth-child(3) {
     display: none;
   }
 
   .groups {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .options,
-  .extras {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto;
-    grid-auto-flow: row;
-  }
-
+@media (max-width: 720px) {
   .columns {
     display: none;
   }
 
   .planLink {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 6px 20px;
-  }
-
-  .summary {
-    grid-column: 1 / -1;
-    grid-row: 2;
+    grid-template-columns: auto minmax(0, 1fr) 40px;
+    grid-template-areas:
+      'idx term arrow'
+      'name name arrow'
+      'sum sum arrow'
+      'price price arrow';
+    row-gap: var(--space-8);
+    padding: 20px 0;
   }
 
   .term {
-    grid-column: 1;
-    grid-row: 3;
+    @include s.kicker;
   }
 
   .price {
-    grid-column: 2;
-    grid-row: 1;
+    text-align: left;
+  }
+
+  .miniApp,
+  .options,
+  .extras {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .miniApp {
+    padding: var(--space-24);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .groups {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .option {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2px;
-  }
-
-  .optionPrice,
-  .optionMonthly {
-    grid-column: 1;
-    text-align: left;
   }
 
   .optionPrice {
-    grid-row: 2;
-  }
-
-  .optionMonthly {
-    grid-row: 3;
-  }
-
-  .optionNote {
-    grid-row: 4;
-  }
-
-  .planLink {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 6px;
-  }
-
-  .name {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .price {
-    grid-column: 1;
-    grid-row: 2;
     text-align: left;
-  }
-
-  .summary {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .term {
-    grid-column: 1;
-    grid-row: 4;
   }
 }

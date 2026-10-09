@@ -17,12 +17,10 @@ const OWN_DESIGNS = [
   ['kinetic', KineticSection],
   ['terminal', TerminalSection],
   ['pop', PopSection],
+  ['swiss', SwissSection],
 ] as const;
 
-const SHARED_DESIGNS = [
-  ['swiss', SwissSection],
-  ['editorial', EditorialSection],
-] as const;
+const SHARED_DESIGNS = [['editorial', EditorialSection]] as const;
 
 const briefType = (Section: (typeof OWN_DESIGNS)[number][1], design: (typeof OWN_DESIGNS)[number][0]) =>
   (Section({ section: 'brief', design, plan: null }) as ReactElement).type;

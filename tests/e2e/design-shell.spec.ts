@@ -43,7 +43,7 @@ const SHAPES: Record<(typeof DESIGNS)[number], DesignShape> = {
     heroTitle: /Сайт\sна\sкоде\sза\s14\sдней\./,
     heroTitleFont: /Geologica/,
     heroCtas: ['Рассчитать стоимость', 'Как мы работаем'],
-    heroMark: '01 — Студия',
+    heroMark: 'Основана в 2026',
   },
   editorial: {
     displayFont: /Prata/,

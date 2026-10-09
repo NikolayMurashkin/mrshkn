@@ -77,8 +77,8 @@
       }
     },
     "swiss": {
-      "sectionMark": "01 — Studio",
-      "title": "Custom-coded websites in 14 days.",
+      "sectionMark": "Studio",
+      "title": "Custom-coded websites in 14 days<dot>.</dot>",
       "lead": "Websites and Telegram apps for business that score 90+ in Lighthouse and still hold up a year later.",
       "primaryCta": "Get a quote",
       "secondaryCta": "How we work"
@@ -99,7 +99,7 @@
     "kineticKicker": "Plans",
     "heading": "Services and pricing",
     "note": "The price in the contract does not change",
-    "sectionMark": "02 — Services",
+    "sectionMark": "Services",
     "planLink": "{name} — details",
     "columns": {
       "number": "No.",
@@ -267,7 +267,7 @@
   },
   "process": {
     "heading": "How the two weeks go",
-    "sectionMark": "03 — Process",
+    "sectionMark": "Process",
     "promisesHeading": "What the contract says",
     "contractNote": "All four are written into the contract",
     "dayLabel": "Day {day}",
@@ -324,7 +324,7 @@
     "cta": "Send a request",
     "replyTime": "We reply within an hour during working hours",
     "command": "open mrshkn.com/brief",
-    "sectionMark": "04 — Contact"
+    "sectionMark": "Contact"
   },
   "switcher": {
     "label": "Style"

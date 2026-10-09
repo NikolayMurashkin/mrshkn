@@ -198,6 +198,54 @@
   font-weight: 500;
 }
 
+[data-design='swiss'] .pill {
+  height: 44px;
+  padding: 0 var(--space-16);
+  font-size: 14px;
+  transition: color var(--duration-fast) var(--ease-in-out);
+
+  .label {
+    color: inherit;
+  }
+
+  svg {
+    display: none;
+  }
+
+  &::before {
+    content: string.unquote("'' / ''");
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+}
+
+[data-design='swiss'] .menu {
+  min-width: 180px;
+  padding: var(--space-4);
+}
+
+[data-design='swiss'] .item,
+[data-design='swiss'] .itemActive {
+  padding: 10px 12px;
+  font-size: 15px;
+  transition: color var(--duration-fast) var(--ease-in-out);
+
+  &:hover {
+    background: transparent;
+    color: var(--accent-ink);
+  }
+}
+
+[data-design='swiss'] .itemActive {
+  &,
+  &:hover {
+    background: var(--ink);
+    color: var(--ink-inverse);
+  }
+}
+
 [data-design='editorial'] .pill,
 [data-design='editorial'] .menu {
   font-weight: 500;

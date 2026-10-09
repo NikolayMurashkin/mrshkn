@@ -27,6 +27,8 @@ type TestCaseDetail = TestCase & { task: string; solution: string; lighthouse: {
 
 const CARD_MARKER = 'data-testid="case-card"';
 const METRIC_MARKER = 'data-testid="case-metric"';
+const CARD_METRICS: Record<string, number> = { swiss: 2 };
+const DEFAULT_CARD_METRICS = 3;
 
 const makeCase = (slug: string, kind: 'demo' | 'client', metrics: TestCase['metrics'] = []): TestCase => ({
   title: `Кейс ${slug}`,
@@ -93,16 +95,17 @@ describe('секция «Работы»', () => {
     },
   );
 
-  it.each([...DESIGN_NAMES])('%s: на карточке не больше трех метрик, первые по порядку', async (design) => {
+  it.each([...DESIGN_NAMES])('%s: на карточке лимит метрик направления, первые по порядку', async (design) => {
     const Works = await loadComponent<{ cases: TestCase[] }>(design, 'Works');
     const metrics = makeMetrics(5);
+    const limit = CARD_METRICS[design] ?? DEFAULT_CARD_METRICS;
 
     const html = render(Works, { cases: [makeCase('alpha', 'demo', metrics)] });
     const [card] = cardsOf(html);
 
-    expect(count(card, METRIC_MARKER)).toBe(3);
-    metrics.slice(0, 3).forEach(({ value }) => expect(card).toContain(value));
-    metrics.slice(3).forEach(({ value }) => expect(card).not.toContain(value));
+    expect(count(card, METRIC_MARKER)).toBe(limit);
+    metrics.slice(0, limit).forEach(({ value }) => expect(card).toContain(value));
+    metrics.slice(limit).forEach(({ value }) => expect(card).not.toContain(value));
   });
 
   it.each([...DESIGN_NAMES])('%s: при пустом списке секция рендерит пустую строку', async (design) => {

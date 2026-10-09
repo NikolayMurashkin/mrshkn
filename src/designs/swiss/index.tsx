@@ -1,7 +1,5 @@
 'use client';
 
-import { Brief } from '@/components/Brief/Brief';
-import { BriefThanks } from '@/components/Brief/BriefThanks';
 import { ServicePage } from '@/components/ServicePage/ServicePage';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
@@ -12,6 +10,8 @@ import { SwissHeader } from './Header';
 import { SwissHero } from './Hero';
 import { SwissPricing } from './Pricing';
 import { SwissProcess } from './Process';
+import { SwissBrief } from './SwissBrief';
+import { SwissBriefThanks } from './SwissBriefThanks';
 import { SwissWorks } from './Works';
 
 const COMPONENTS: DesignComponents = {
@@ -22,8 +22,8 @@ const COMPONENTS: DesignComponents = {
   process: SwissProcess,
   case: SwissCase,
   footer: SwissFooter,
-  brief: Brief,
-  briefThanks: BriefThanks,
+  brief: SwissBrief,
+  briefThanks: SwissBriefThanks,
   servicePage: ServicePage,
 };
 

@@ -77,8 +77,8 @@
       }
     },
     "swiss": {
-      "sectionMark": "01 — Студия",
-      "title": "Сайт на коде за 14 дней.",
+      "sectionMark": "Студия",
+      "title": "Сайт на коде за 14 дней<dot>.</dot>",
       "lead": "Сайты и Telegram-приложения для бизнеса, которые проходят Lighthouse на 90+ и не разваливаются через год.",
       "primaryCta": "Рассчитать стоимость",
       "secondaryCta": "Как мы работаем"
@@ -99,7 +99,7 @@
     "kineticKicker": "Тарифы",
     "heading": "Услуги и цены",
     "note": "Цена в договоре не меняется",
-    "sectionMark": "02 — Услуги",
+    "sectionMark": "Услуги",
     "planLink": "{name} — подробнее",
     "columns": {
       "number": "№",
@@ -267,7 +267,7 @@
   },
   "process": {
     "heading": "Как проходят две недели",
-    "sectionMark": "03 — Процесс",
+    "sectionMark": "Процесс",
     "promisesHeading": "Что в договоре",
     "contractNote": "Все четыре условия прописаны в договоре",
     "dayLabel": "День {day}",
@@ -324,7 +324,7 @@
     "cta": "Оставить заявку",
     "replyTime": "Отвечаем в течение часа в рабочее время",
     "command": "open mrshkn.com/brief",
-    "sectionMark": "04 — Контакт"
+    "sectionMark": "Контакт"
   },
   "switcher": {
     "label": "Стиль"
