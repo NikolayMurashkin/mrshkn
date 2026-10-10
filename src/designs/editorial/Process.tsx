@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { PROCESS_STEPS, PROMISES } from '@/content/process';
+import { EditorialRubric } from './Rubric';
 import styles from './Process.module.scss';
 
 export const EditorialProcess = () => {
@@ -12,14 +13,17 @@ export const EditorialProcess = () => {
       id="process"
       aria-labelledby="process-heading"
     >
-      <div className={styles.rule}>
+      <div className={styles.head}>
+        <EditorialRubric
+          label={t('sectionMark')}
+          note={t('contractNote')}
+        />
         <h2
-          className={styles.heading}
+          className={styles.title}
           id="process-heading"
         >
           {t('promisesHeading')}
         </h2>
-        <span className={styles.note}>{t('contractNote')}</span>
       </div>
 
       <ul
@@ -38,9 +42,7 @@ export const EditorialProcess = () => {
         ))}
       </ul>
 
-      <div className={styles.rule}>
-        <h3 className={styles.heading}>{t('heading')}</h3>
-      </div>
+      <h3 className={styles.subhead}>{t('heading')}</h3>
 
       <ol
         className={styles.steps}
@@ -52,7 +54,13 @@ export const EditorialProcess = () => {
             data-day={step.day}
             key={step.id}
           >
-            <p className={styles.paragraph}>
+            <span
+              className={styles.day}
+              aria-hidden="true"
+            >
+              {step.day}
+            </span>
+            <p className={styles.text}>
               <span className={styles.ordinal}>{t(`steps.${step.id}.ordinal`)}.</span>{' '}
               <span className={styles.stepTitle}>{t(`steps.${step.id}.title`)}.</span> {t(`steps.${step.id}.text`)}
             </p>

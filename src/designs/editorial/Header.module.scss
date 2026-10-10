@@ -1,5 +1,15 @@
+@use './shared' as s;
+
+:global(html):has(.nav) {
+  scroll-padding-top: s.$nav-height;
+}
+
 .header {
-  margin: 0 clamp(20px, 6.6vw, 96px);
+  position: sticky;
+  top: calc(-1 * #{s.$masthead-height});
+  z-index: 10;
+  padding: 0 var(--e-gutter);
+  background: var(--bg);
 }
 
 .masthead {
@@ -12,15 +22,14 @@
 }
 
 .caps {
-  display: flex;
+  @include s.caps;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-16);
   width: 100%;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  height: s.$caps-height;
   color: var(--muted);
 }
 
@@ -29,30 +38,41 @@
   white-space: nowrap;
 }
 
+.location {
+  text-align: center;
+}
+
 .controls {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 14px;
 }
 
 .locales {
   display: flex;
+  align-items: center;
   gap: 14px;
 }
 
-.locale,
-.localeActive {
+.locale {
   display: inline-flex;
   align-items: center;
-}
+  justify-content: center;
+  color: var(--muted);
+  transition: color var(--duration-fast) var(--ease-out);
 
-.localeActive {
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
-}
+  &:hover {
+    color: var(--accent-ink);
+  }
 
-.locale:hover {
-  color: var(--accent-ink);
+  &[aria-current='true'] {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: var(--border-width-mark);
+    text-underline-offset: 0.45em;
+  }
 }
 
 .theme {
@@ -63,88 +83,130 @@
   height: 36px;
   padding: 0;
   border: 0;
+  border-radius: var(--radius-control);
   background: transparent;
-  color: inherit;
+  color: var(--muted);
   cursor: pointer;
-}
+  transition: color var(--duration-fast) var(--ease-out);
 
-.theme:hover {
-  color: var(--accent-ink);
+  &:hover {
+    color: var(--accent-ink);
+  }
 }
 
 .wordmark {
+  height: 1em;
   padding-left: 0.22em;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(44px, 6vw, 88px);
-  letter-spacing: 0.22em;
+  font-size: s.$wordmark-size;
   line-height: 1;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+  color: var(--ink);
 }
 
 .tagline {
   font-size: 12px;
   font-weight: 500;
+  line-height: s.$tagline-height;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--muted);
   text-align: center;
+  white-space: nowrap;
+  color: var(--muted);
 }
 
 .nav {
   display: flex;
   justify-content: center;
   gap: 44px;
-  padding: 14px 0;
   border-bottom: var(--border-width) solid var(--ink);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.04em;
+
+  a {
+    position: relative;
+    padding: s.$nav-padding 0;
+    line-height: s.$nav-link-height;
+    white-space: nowrap;
+    transition: color var(--duration-fast) var(--ease-out);
+
+    &:hover {
+      color: var(--accent-ink);
+    }
+
+    &[aria-current]::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: calc(-1 * var(--border-width));
+      left: 0;
+      height: var(--border-width-mark);
+      background: var(--accent);
+    }
+  }
 }
 
-.nav a:hover {
-  color: var(--accent-ink);
-}
-
-@media (max-width: 900px) {
-  .nav {
-    display: none;
+@media (max-width: 1080px) {
+  .caps {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .location {
     display: none;
   }
 
-  .locale,
-  .localeActive {
-    min-width: 44px;
-    min-height: 48px;
-    justify-content: center;
-  }
-
-  .locales {
-    gap: 0;
-  }
-
-  .theme {
-    width: 48px;
-    height: 48px;
+  .nav {
+    gap: 28px;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 720px) {
+  :global(html):has(.nav) {
+    scroll-padding-top: 0;
+  }
+
+  .header {
+    position: static;
+  }
+
   .masthead {
-    padding: 16px 0;
+    padding: var(--space-16) 0;
+  }
+
+  .caps {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
   }
 
   .kicker {
     display: none;
   }
 
-  .caps {
-    justify-content: flex-end;
+  .locales {
+    gap: 0;
+  }
+
+  .locale {
+    min-width: 44px;
+    min-height: 48px;
+  }
+
+  .theme {
+    width: 48px;
+    height: 48px;
   }
 
   .tagline {
+    @include s.wrap;
+
     letter-spacing: 0.2em;
+    white-space: normal;
+  }
+
+  .nav {
+    display: none;
   }
 }

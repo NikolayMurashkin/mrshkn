@@ -248,7 +248,63 @@
 
 [data-design='editorial'] .pill,
 [data-design='editorial'] .menu {
+  border-color: var(--line-strong);
   font-weight: 500;
+}
+
+[data-design='editorial'] .pill {
+  height: 44px;
+  padding: 0 var(--space-16);
+  font-size: 14px;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    border-color: var(--ink);
+    color: var(--accent-ink);
+  }
+
+  .label {
+    color: inherit;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  svg {
+    display: none;
+  }
+}
+
+[data-design='editorial'] .item,
+[data-design='editorial'] .itemActive {
+  position: relative;
+  padding: 9px 14px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+[data-design='editorial'] .itemActive::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 2px;
+  width: var(--border-width-mark);
+  background: var(--accent);
+}
+
+@media (max-width: 720px) {
+  [data-design='editorial'] .root {
+    right: 16px;
+    bottom: 16px;
+  }
 }
 
 @media (max-width: 560px) {

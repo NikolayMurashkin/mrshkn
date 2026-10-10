@@ -163,7 +163,7 @@ test.describe('контраст в светлой теме — цвет токе
       opacity: '1',
     });
     expect(await paintOf(header.getByTestId('locale-ru'))).toEqual({
-      color: await tokenColor(page, '--muted'),
+      color: await tokenColor(page, '--ink'),
       opacity: '1',
     });
     await expect(header.getByTestId('locale-ru')).toHaveCSS('text-decoration-line', 'underline');

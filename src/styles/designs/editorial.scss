@@ -1,10 +1,20 @@
 @font-face {
   font-family: 'Prata Metric Fallback';
   src: local('Times New Roman'), local('Liberation Serif'), local('Noto Serif'), local('Georgia');
-  ascent-override: 83.87%;
-  descent-override: 30.57%;
+  ascent-override: 82%;
+  descent-override: 29.89%;
   line-gap-override: 0%;
-  size-adjust: 118.4%;
+  size-adjust: 121.1%;
+}
+
+@font-face {
+  font-family: 'Prata Metric Fallback';
+  src: local('Times New Roman'), local('Liberation Serif'), local('Noto Serif'), local('Georgia');
+  ascent-override: 85.31%;
+  descent-override: 31.1%;
+  line-gap-override: 0%;
+  size-adjust: 116.4%;
+  unicode-range: U+0400-052F;
 }
 
 @font-face {
@@ -30,12 +40,40 @@
   --accent-contrast: #ffffff;
   --surface: #fbfbf9;
   --surface-soft: #eceee8;
+  --line-strong: #81867e;
 
   --radius-control: 2px;
   --radius-surface: 2px;
   --border-width: 1px;
+  --border-width-mark: 2px;
   --border-width-strong: 3px;
   --shadow-floating: none;
+
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-72: 72px;
+  --space-96: 96px;
+  --space-120: 120px;
+
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-rule: 700ms;
+  --duration-reveal: 900ms;
+  --duration-stagger: 90ms;
+  --duration-page: 450ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --e-gutter: clamp(20px, 6.6vw, 96px);
+  --e-column-gap: var(--space-32);
+  --e-section-y: var(--space-96);
+  --e-head-gap: var(--space-48);
 
   color-scheme: light;
 }
@@ -51,6 +89,34 @@
   --accent-contrast: #141614;
   --surface: #1b1e1b;
   --surface-soft: #22261f;
+  --line-strong: #6c7468;
 
   color-scheme: dark;
+}
+
+[data-design='editorial'] :focus-visible {
+  outline: var(--border-width-mark) solid var(--accent-ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1080px) {
+  [data-design='editorial'] {
+    --e-section-y: var(--space-72);
+  }
+}
+
+@media (max-width: 720px) {
+  [data-design='editorial'] {
+    --e-column-gap: var(--space-12);
+    --e-head-gap: var(--space-32);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-design='editorial'] *,
+  [data-design='editorial'] *::before,
+  [data-design='editorial'] *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }

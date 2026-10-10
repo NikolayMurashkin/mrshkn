@@ -135,7 +135,7 @@ export const DesignSwitcher = ({ design }: DesignSwitcherProps) => {
       >
         <GlobeIcon size={16} />
         <span className={styles.label}>
-          {t('label')}: {DESIGN_LABELS[design]}
+          {t('label')}: <span className={styles.name}>{DESIGN_LABELS[design]}</span>
         </span>
         <ChevronDownIcon size={14} />
       </button>

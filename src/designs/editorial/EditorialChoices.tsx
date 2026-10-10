@@ -1,7 +1,7 @@
-import type { ChoicesProps } from './types';
-import styles from './Brief.module.scss';
+import type { EditorialChoicesProps } from './types';
+import styles from './EditorialBrief.module.scss';
 
-export const Choices = ({ field, values, selected, labelOf, onPick }: ChoicesProps) => (
+export const EditorialChoices = ({ field, values, selected, labelOf, onPick }: EditorialChoicesProps) => (
   <div className={styles.choices}>
     {values.map((value) => (
       <button

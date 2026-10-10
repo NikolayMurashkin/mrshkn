@@ -1,15 +1,37 @@
 import { useLocale, useTranslations } from 'next-intl';
+import { useMemo } from 'react';
 import { MoonIcon } from '@/components/icons';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { SERVICES } from '@/content/services';
+import { usePathname } from '@/i18n/navigation';
+import { WORK_NAV_ITEM } from '../consts';
 import { visibleNavItems } from '../nav';
 import type { HeaderProps } from '../types';
-import { EDITORIAL_NAV_ITEMS } from './consts';
+import { useActiveSection } from '../use-active-section';
+import { EDITORIAL_NAV_ITEMS, EDITORIAL_NAV_OFFSET, WORK_PATH_PREFIX } from './consts';
 import styles from './Header.module.scss';
 
 export const EditorialHeader = ({ hasCases }: HeaderProps) => {
   const t = useTranslations();
   const locale = useLocale();
+  const pathname = usePathname();
+  const items = useMemo(() => visibleNavItems(EDITORIAL_NAV_ITEMS, hasCases), [hasCases]);
+  const active = useActiveSection(items, pathname === '/', EDITORIAL_NAV_OFFSET);
+  const onCase = pathname.startsWith(WORK_PATH_PREFIX);
+  const onService = SERVICES.some((service) => pathname === `/${service.slug}`);
+
+  const current = (item: string) => {
+    if (onCase && item === WORK_NAV_ITEM) {
+      return 'page';
+    }
+
+    if (onService && item === 'services') {
+      return 'page';
+    }
+
+    return item === active ? 'true' : undefined;
+  };
 
   return (
     <header className={styles.header}>
@@ -21,28 +43,33 @@ export const EditorialHeader = ({ hasCases }: HeaderProps) => {
             <LocaleSwitcher
               className={styles.locales}
               itemClassName={styles.locale}
-              activeItemClassName={styles.localeActive}
+              activeItemClassName={styles.locale}
             />
             <ThemeToggle className={styles.theme}>
-              <MoonIcon size={18} />
+              <MoonIcon
+                size={18}
+                strokeWidth={1.6}
+              />
             </ThemeToggle>
           </div>
         </div>
         <span
           className={styles.wordmark}
+          translate="no"
           data-testid="brand"
         >
           {t('brand.name')}
         </span>
         <span className={styles.tagline}>
-          {t('brand.tagline')} · {t('header.founded')}
+          <span translate="no">{t('brand.tagline')}</span> · {t('header.founded')}
         </span>
       </div>
       <nav className={styles.nav}>
-        {visibleNavItems(EDITORIAL_NAV_ITEMS, hasCases).map((item) => (
+        {items.map((item) => (
           <a
             key={item}
             href={`/${locale}#${item}`}
+            aria-current={current(item)}
           >
             {t(`nav.${item}`)}
           </a>

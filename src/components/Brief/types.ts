@@ -16,27 +16,9 @@ export type BriefProps = {
   plan: string | null;
 };
 
-export type ChoicesProps = {
-  field: BriefChoice;
-  values: readonly string[];
-  selected: string;
-  labelOf: (value: string) => string;
-  onPick: (field: BriefChoice, value: string) => void;
-};
-
-export type DesignChoiceProps = {
-  selected: string;
-  onPick: (field: BriefChoice, value: string) => void;
-  labelOf: (value: string) => string;
-};
-
-export type DesignThumbProps = {
-  design: string;
-};
-
 export type BriefStatus = 'idle' | 'sending' | 'error';
 
-/** Состояние и действия квиза: общий `Brief` и квиз направления только рисуют на этом хуке. */
+/** Состояние и действия квиза: квиз каждого направления только рисует на этом хуке. */
 export type UseBrief = {
   step: number;
   current: BriefStep;

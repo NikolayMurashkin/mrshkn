@@ -1,0 +1,9 @@
+@use './shared' as s;
+
+.dashes {
+  @include s.dashes;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

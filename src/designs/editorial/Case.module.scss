@@ -1,115 +1,121 @@
+@use './shared' as s;
+
 .case {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 40px clamp(20px, 6.6vw, 96px) 72px;
+  gap: var(--space-56);
+  padding: 40px 0 0;
 }
 
 .back {
-  align-self: flex-start;
-  font-size: 14px;
-  color: var(--muted);
+  @include s.back-link;
+
+  margin: 0 var(--e-gutter);
 }
 
-.back:hover {
-  color: var(--ink);
+.head,
+.block {
+  @include s.layout;
 }
 
-.head {
-  display: flex;
-  flex-direction: column;
+.margin {
+  @include s.layout-margin;
+}
+
+.head .margin {
+  padding-top: 14px;
+}
+
+.headMain {
+  @include s.layout-main;
+
+  gap: var(--space-24);
   align-items: flex-start;
-  gap: 12px;
-  width: 100%;
-  min-width: 0;
 }
 
 .kind {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  @include s.kicker;
+}
+
+.meta {
+  @include s.wrap;
+
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--muted);
 }
 
 .title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(32px, 5vw, 60px);
-  line-height: 1.1;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
+  @include s.page-title;
+  @include s.wrap;
 
-.meta {
-  margin: 0;
-  font-size: 15px;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  width: 100%;
 }
 
 .demo {
-  font-size: 15px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  @include s.arrow-link;
+}
+
+.figure {
+  @include s.figure;
+
+  margin: 0 var(--e-gutter);
 }
 
 .cover {
-  display: block;
-  width: 100%;
-  height: auto;
+  @include s.cover;
+
   aspect-ratio: 16 / 10;
-  object-fit: cover;
 }
 
-.block {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding-top: 0;
+.caption {
+  @include s.caption;
+}
+
+.block .margin {
+  padding-top: 18px;
+  border-top: var(--border-width) solid var(--ink);
+}
+
+.main {
+  grid-column: 4 / span 7;
   min-width: 0;
+  padding-top: 18px;
+  border-top: var(--border-width) solid var(--line);
+}
+
+.wide .main {
+  grid-column: 4 / span 9;
 }
 
 .heading {
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-  margin: 0;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
+  @include s.card-title;
 }
 
-.heading::after {
-  content: '';
-  flex: 1;
-  height: var(--border-width);
-  background: var(--ink);
+.prose {
+  @include s.wrap;
+
+  max-width: 66 * s.$text-ch;
+  font-size: 18px;
+  line-height: 1.65;
+
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: 18px;
+  }
 }
 
-.text {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 760px;
-}
-
-.paragraph {
-  margin: 0;
-  font-size: 17px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-  min-width: 0;
+.first {
+  @include s.dropcap;
 }
 
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
+  gap: var(--space-32) 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -118,25 +124,25 @@
 .metric {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-8);
+  padding: 0 var(--space-24);
+  border-left: var(--border-width) solid var(--line);
   min-width: 0;
+
+  &:nth-child(4n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
 }
 
 .metricValue {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(28px, 3.4vw, 44px);
-  line-height: 1;
-  color: var(--accent-ink);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.metric-value;
+
+  font-size: clamp(26px, 2.5vw, 36px);
 }
 
 .metricLabel {
-  font-size: 14px;
-  color: var(--muted);
-  overflow-wrap: anywhere;
-  min-width: 0;
+  @include s.metric-label;
 }
 
 .shot {
@@ -144,16 +150,49 @@
   width: 100%;
   max-width: 960px;
   height: auto;
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-surface);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1080px) {
+  .head .margin {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .block {
+    row-gap: 14px;
+  }
+
+  .main,
+  .wide .main {
+    grid-column: 1 / -1;
+    padding-top: 0;
+    border-top: 0;
+  }
+
   .metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .metric:nth-child(n) {
+    padding-left: var(--space-24);
+    border-left: var(--border-width) solid var(--line);
+  }
+
+  .metric:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .metrics {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .metric:nth-child(n) {
+    padding-left: 0;
+    border-left: 0;
   }
 }

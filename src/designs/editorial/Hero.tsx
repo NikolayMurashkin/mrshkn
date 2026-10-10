@@ -8,14 +8,14 @@ export const EditorialHero = () => {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.content}>
+      <div className={styles.main}>
         <h1 className={styles.title}>{t('editorial.title')}</h1>
         <p className={styles.lead}>
           {t('subtitle')} {t('editorial.lead')}
         </p>
         <div className={styles.actions}>
           <Link
-            className={`${styles.button} ${styles.buttonPrimary}`}
+            className={`${styles.button} ${styles.primary}`}
             href={BRIEF_HREF}
           >
             {t('editorial.primaryCta')}
@@ -29,13 +29,13 @@ export const EditorialHero = () => {
         </div>
       </div>
       <aside className={styles.aside}>
-        <span className={styles.caps}>{t('editorial.quoteKicker')}</span>
+        <span className={styles.kicker}>{t('editorial.quoteKicker')}</span>
         <blockquote className={styles.quote}>{t('editorial.quote')}</blockquote>
-        <div className={styles.refs}>
-          <span>{t('editorial.refDeadline')}</span>
-          <span>{t('editorial.refQuality')}</span>
-          <span>{t('editorial.refWarranty')}</span>
-        </div>
+        <ul className={styles.refs}>
+          <li>{t('editorial.refDeadline')}</li>
+          <li>{t('editorial.refQuality')}</li>
+          <li>{t('editorial.refWarranty')}</li>
+        </ul>
       </aside>
     </section>
   );

@@ -215,6 +215,7 @@ export interface Case {
   design: 'kinetic' | 'terminal' | 'pop' | 'swiss' | 'editorial';
   demoUrl?: string | null;
   cover: number | Media;
+  coverCaption?: string | null;
   /**
    * Абзацы разделяет пустая строка.
    */
@@ -458,6 +459,7 @@ export interface CasesSelect<T extends boolean = true> {
   design?: T;
   demoUrl?: T;
   cover?: T;
+  coverCaption?: T;
   task?: T;
   solution?: T;
   metrics?:

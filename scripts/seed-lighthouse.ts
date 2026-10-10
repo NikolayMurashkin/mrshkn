@@ -25,6 +25,7 @@ const TEXTS = {
       { value: '4', label: 'Служебное значение 4' },
     ],
     coverAlt: 'Служебная обложка кейса',
+    coverCaption: 'Служебная подпись к обложке',
     shotAlt: 'Служебный скрин отчета',
   },
   en: {
@@ -39,6 +40,7 @@ const TEXTS = {
       { value: '4', label: 'Service value 4' },
     ],
     coverAlt: 'Service case cover',
+    coverCaption: 'Service cover caption',
     shotAlt: 'Service report screenshot',
   },
 };
@@ -83,6 +85,7 @@ const seed = async () => {
       design: 'kinetic',
       demoUrl: 'https://example.com',
       cover,
+      coverCaption: TEXTS.ru.coverCaption,
       task: TEXTS.ru.task,
       solution: TEXTS.ru.solution,
       metrics: TEXTS.ru.metrics,
@@ -97,6 +100,7 @@ const seed = async () => {
     locale: 'en',
     data: {
       title: TEXTS.en.title,
+      coverCaption: TEXTS.en.coverCaption,
       task: TEXTS.en.task,
       solution: TEXTS.en.solution,
       metrics: (created.metrics ?? []).map(({ id }, index) => ({ id, ...TEXTS.en.metrics[index] })),

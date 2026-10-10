@@ -1,12 +1,12 @@
 'use client';
 
-import { Brief } from '@/components/Brief/Brief';
-import { BriefThanks } from '@/components/Brief/BriefThanks';
 import { ServicePage } from '@/components/ServicePage/ServicePage';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
 import './fonts';
 import { EditorialCase } from './Case';
+import { EditorialBrief } from './EditorialBrief';
+import { EditorialBriefThanks } from './EditorialBriefThanks';
 import { EditorialFooter } from './Footer';
 import { EditorialHeader } from './Header';
 import { EditorialHero } from './Hero';
@@ -22,8 +22,8 @@ const COMPONENTS: DesignComponents = {
   process: EditorialProcess,
   case: EditorialCase,
   footer: EditorialFooter,
-  brief: Brief,
-  briefThanks: BriefThanks,
+  brief: EditorialBrief,
+  briefThanks: EditorialBriefThanks,
   servicePage: ServicePage,
 };
 

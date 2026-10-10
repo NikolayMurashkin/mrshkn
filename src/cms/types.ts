@@ -16,6 +16,7 @@ export type CaseCard = Pick<Case, 'title' | 'slug' | 'kind' | 'niche' | 'design'
   demoUrl: string | null;
   metrics: CaseMetric[];
   cover: CaseImage;
+  coverCaption: string | null;
 };
 
 /** Страница кейса: карточка плюс задача, решение и скрин Lighthouse. */

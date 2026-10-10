@@ -40,6 +40,7 @@ export const Cases: CollectionConfig = {
     },
     { name: 'demoUrl', type: 'text', label: 'Ссылка на демо' },
     { name: 'cover', type: 'upload', relationTo: 'media', label: 'Обложка', required: true },
+    { name: 'coverCaption', type: 'text', label: 'Подпись к обложке', localized: true },
     {
       name: 'task',
       type: 'textarea',

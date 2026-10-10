@@ -42,7 +42,7 @@ const toImage = (value: unknown): CaseImage | null => {
   };
 };
 
-const toCard = ({ title, slug, kind, niche, design, demoUrl, metrics, cover }: Case): CaseCard | null => {
+const toCard = ({ title, slug, kind, niche, design, demoUrl, metrics, cover, coverCaption }: Case): CaseCard | null => {
   const image = toImage(cover);
 
   if (!image) {
@@ -58,6 +58,7 @@ const toCard = ({ title, slug, kind, niche, design, demoUrl, metrics, cover }: C
     demoUrl: demoUrl ?? null,
     metrics: (metrics ?? []).map(({ value, label }) => ({ value, label })),
     cover: image,
+    coverCaption: coverCaption?.trim() || null,
   };
 };
 

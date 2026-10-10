@@ -1,0 +1,17 @@
+@use './shared' as s;
+
+.rubric {
+  @include s.rubric;
+}
+
+.label {
+  @include s.rubric-label;
+}
+
+.rule {
+  @include s.rubric-rule;
+}
+
+.note {
+  @include s.rubric-note;
+}
