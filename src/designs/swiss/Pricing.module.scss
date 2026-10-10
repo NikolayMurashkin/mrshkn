@@ -240,120 +240,6 @@
   @include s.wrap;
 }
 
-.groups {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-24);
-  counter-reset: swiss-group;
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-  padding-top: var(--space-12);
-  border-top: var(--border-width) solid var(--ink);
-  counter-increment: swiss-group;
-  min-width: 0;
-}
-
-.groupTitle {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
-
-  @include s.wrap;
-
-  &::before {
-    content: counter(swiss-group, decimal-leading-zero);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-  }
-}
-
-.checks {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  li {
-    position: relative;
-    padding-left: 20px;
-    font-size: 14.5px;
-    line-height: 1.45;
-
-    @include s.wrap;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0.72em;
-      left: 0;
-      width: 10px;
-      height: var(--border-width-strong);
-      background: var(--ink);
-    }
-  }
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-24);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.option {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-4) var(--space-16);
-  padding: 14px 0;
-  border-bottom: var(--border-width) solid var(--line);
-  min-width: 0;
-}
-
-.optionName {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.35;
-
-  @include s.wrap;
-}
-
-.optionPrice {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.35;
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-.optionNote,
-.optionMonthly {
-  grid-column: 1 / -1;
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--muted);
-
-  @include s.wrap;
-}
-
-.optionMonthly {
-  font-variant-numeric: tabular-nums;
-}
-
 .extras {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -411,10 +297,6 @@
   .columns > :nth-child(3) {
     display: none;
   }
-
-  .groups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 720px) {
@@ -442,26 +324,11 @@
   }
 
   .miniApp,
-  .options,
   .extras {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .miniApp {
     padding: var(--space-24);
-  }
-}
-
-@media (max-width: 480px) {
-  .groups {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .option {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .optionPrice {
-    text-align: left;
   }
 }

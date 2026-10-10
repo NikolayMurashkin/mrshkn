@@ -1,0 +1,285 @@
+@use './shared' as s;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-56);
+  margin: 0 var(--s-gutter);
+  padding: var(--space-40) 0 0;
+  min-width: 0;
+}
+
+.back {
+  @include s.back-link;
+}
+
+.head {
+  @include s.grid;
+
+  padding-top: 20px;
+  border-top: var(--border-width-strong) solid var(--ink);
+}
+
+.headAside {
+  @include s.aside;
+
+  align-items: flex-start;
+}
+
+.kicker {
+  @include s.kicker;
+}
+
+.headMain {
+  @include s.main-column;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+}
+
+.title {
+  @include s.title;
+
+  width: 100%;
+}
+
+.lead {
+  @include s.lead;
+
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  @include s.tag;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-16) var(--space-24);
+  min-width: 0;
+}
+
+.cta {
+  @include s.button;
+  @include s.button-primary;
+  @include s.button-large;
+}
+
+.kind {
+  font-size: 13px;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.cols {
+  @include s.grid;
+
+  align-items: start;
+}
+
+.stack {
+  grid-column: span 8;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-56);
+  min-width: 0;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  min-width: 0;
+}
+
+.blockHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-8) var(--space-24);
+  padding-bottom: var(--space-12);
+  border-bottom: var(--border-width) solid var(--ink);
+}
+
+.blockTitle {
+  @include s.card-title;
+
+  font-size: 28px;
+}
+
+.blockNote {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.more {
+  @include s.arrow-link;
+}
+
+.faq {
+  border-bottom: var(--border-width) solid var(--ink);
+}
+
+.question {
+  border-top: var(--border-width) solid var(--ink);
+  min-width: 0;
+
+  &:first-child {
+    border-top: 0;
+  }
+}
+
+.summary {
+  position: relative;
+  display: block;
+  padding: 20px 48px 20px 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: pretty;
+  list-style: none;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-in-out);
+
+  @include s.wrap;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 31px;
+    right: 8px;
+    width: 16px;
+    height: var(--border-width-strong);
+    background: currentcolor;
+    transition: transform var(--duration-base) var(--ease-in-out);
+  }
+
+  &::after {
+    transform: rotate(90deg);
+  }
+
+  &:hover {
+    color: var(--accent-ink);
+  }
+
+  &:focus-visible {
+    outline-offset: 2px;
+  }
+}
+
+.question[open] .summary {
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(135deg);
+  }
+}
+
+.answer {
+  margin: 0;
+  padding: 0 48px 20px 0;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.aside {
+  grid-column: 9 / -1;
+  position: sticky;
+  top: calc(#{s.$header-height} + var(--space-24));
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding: var(--space-24) var(--space-24) 28px;
+  border-top: var(--border-width-strong) solid var(--ink);
+  background: var(--surface-soft);
+  min-width: 0;
+}
+
+.amount {
+  max-width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3vw, 44px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.cardCta {
+  @include s.button;
+  @include s.button-primary;
+  @include s.button-fluid;
+
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 1080px) {
+  .stack,
+  .aside {
+    grid-column: 1 / -1;
+  }
+
+  .aside {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta {
+    @include s.button-fluid(64px);
+
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .summary {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .summary {
+    &::before,
+    &::after {
+      transition: none;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import type { ServiceOptionView } from '@/components/ServicePage/types';
 import type { BriefChoice } from '@/lib/brief/types';
+import type { StepWhen } from '../types';
 
 /** Размер инлайновой иконки Pop: стрелки и звезда рисуются SVG, а не глифом — у Rubik нет стрелок. */
 export type PopIconProps = {
@@ -44,14 +45,8 @@ export type PopOptionsProps = {
   narrow?: boolean;
 };
 
-/** Срок шага в фишке: ярлык мелко, число или диапазон крупно, как «День 1»; без числа ярлык идет целиком. */
-export type PopStepWhen = {
-  label: string;
-  value: string | null;
-};
-
 /** Шаг работы: на главной — шаг 14 дней, на странице услуги — шаг из `services.<id>.process`. */
-export type PopStep = PopStepWhen & {
+export type PopStep = StepWhen & {
   id: string;
   title: string;
   text: string;

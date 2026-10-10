@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { PROCESS_STEPS, PROMISES } from '@/content/process';
 import { SWISS_KEY_DAYS, SWISS_SCALE_DAYS } from './consts';
+import { SwissSteps } from './Steps';
 import styles from './Process.module.scss';
 
 export const SwissProcess = () => {
@@ -65,25 +66,18 @@ export const SwissProcess = () => {
               </span>
             ))}
           </div>
-          <ol
-            className={styles.steps}
-            data-testid="steps"
-          >
-            {PROCESS_STEPS.map((step) => (
-              <li
-                className={styles.cell}
-                data-day={step.day}
-                key={step.id}
-              >
-                <span className={styles.when}>
-                  <span className={styles.kicker}>{hero('kinetic.dayUnit')}</span>
-                  <span className={styles.numeral}>{step.day}</span>
-                </span>
-                <span className={styles.stepTitle}>{t(`steps.${step.id}.title`)}</span>
-                <span className={styles.detail}>{t(`steps.${step.id}.text`)}</span>
-              </li>
-            ))}
-          </ol>
+          <SwissSteps
+            steps={PROCESS_STEPS.map((step) => ({
+              id: step.id,
+              day: step.day,
+              label: hero('kinetic.dayUnit'),
+              value: String(step.day),
+              title: t(`steps.${step.id}.title`),
+              text: t(`steps.${step.id}.text`),
+            }))}
+            testId="steps"
+            titleTag="span"
+          />
         </div>
       </div>
     </section>

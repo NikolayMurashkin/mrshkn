@@ -1,0 +1,70 @@
+@use './shared' as s;
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.narrow {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4) var(--space-16);
+  padding: 14px 0;
+  border-bottom: var(--border-width) solid var(--line);
+  min-width: 0;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+
+  @include s.wrap;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.note,
+.monthly {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+
+  @include s.wrap;
+}
+
+.monthly {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+  .options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .option {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .price {
+    text-align: left;
+  }
+}

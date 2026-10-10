@@ -46,3 +46,5 @@ export const WORK_NAV_ITEM = 'work';
 export const ACTIVE_SECTION_TOLERANCE = 12;
 
 export const PAGE_END_TOLERANCE = 2;
+
+export const STEP_WHEN_PATTERN = /^(.*?)\s*(\d+(?:\s*[–-]\s*\d+)?)$/u;

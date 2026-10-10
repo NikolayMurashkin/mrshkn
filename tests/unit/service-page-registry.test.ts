@@ -16,12 +16,10 @@ const OWN_DESIGNS = [
   ['kinetic', KineticSection],
   ['terminal', TerminalSection],
   ['pop', PopSection],
+  ['swiss', SwissSection],
 ] as const;
 
-const SHARED_DESIGNS = [
-  ['swiss', SwissSection],
-  ['editorial', EditorialSection],
-] as const;
+const SHARED_DESIGNS = [['editorial', EditorialSection]] as const;
 
 const servicePageProps = (service: string) => ({ section: 'servicePage', service }) as unknown as SectionProps;
 

@@ -1,6 +1,5 @@
 'use client';
 
-import { ServicePage } from '@/components/ServicePage/ServicePage';
 import { renderSection } from '../render';
 import type { DesignComponents, SectionProps } from '../types';
 import './fonts';
@@ -10,6 +9,7 @@ import { SwissHeader } from './Header';
 import { SwissHero } from './Hero';
 import { SwissPricing } from './Pricing';
 import { SwissProcess } from './Process';
+import { SwissServicePage } from './ServicePage';
 import { SwissBrief } from './SwissBrief';
 import { SwissBriefThanks } from './SwissBriefThanks';
 import { SwissWorks } from './Works';
@@ -24,7 +24,7 @@ const COMPONENTS: DesignComponents = {
   footer: SwissFooter,
   brief: SwissBrief,
   briefThanks: SwissBriefThanks,
-  servicePage: ServicePage,
+  servicePage: SwissServicePage,
 };
 
 export const SwissSection = (props: SectionProps) => renderSection(COMPONENTS, props);

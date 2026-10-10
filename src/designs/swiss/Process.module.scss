@@ -40,8 +40,7 @@
   gap: var(--space-72);
 }
 
-.promises,
-.steps {
+.promises {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-24);
@@ -128,33 +127,8 @@
   font-weight: 700;
 }
 
-.when {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: var(--space-8);
-}
-
-.numeral {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 4.4vw, 64px);
-  font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-}
-
-.stepTitle {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.25;
-
-  @include s.wrap;
-}
-
 @media (max-width: 1080px) {
-  .promises,
-  .steps {
+  .promises {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -172,8 +146,7 @@
 }
 
 @media (max-width: 480px) {
-  .promises,
-  .steps {
+  .promises {
     grid-template-columns: minmax(0, 1fr);
   }
 

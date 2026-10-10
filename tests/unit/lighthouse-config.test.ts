@@ -45,7 +45,7 @@ const loadConfig = (design?: string): LighthouseConfig => {
 
 const config = loadConfig('kinetic');
 
-describe.each(['kinetic', 'terminal', 'pop'])('lighthouserc.cjs, %s', (design) => {
+describe.each(['kinetic', 'terminal', 'pop', 'swiss'])('lighthouserc.cjs, %s', (design) => {
   const designConfig = loadConfig(design);
 
   it('порог считается по худшему из прогонов, не по лучшему', () => {
@@ -62,7 +62,7 @@ describe.each(['kinetic', 'terminal', 'pop'])('lighthouserc.cjs, %s', (design) =
 });
 
 describe('адреса Lighthouse по направлениям', () => {
-  it.each(['kinetic', 'terminal', 'pop'])('%s меряет главную, один кейс и шесть страниц услуг', (design) => {
+  it.each(['kinetic', 'terminal', 'pop', 'swiss'])('%s меряет главную, один кейс и шесть страниц услуг', (design) => {
     const urls = loadConfig(design).ci.collect.url;
     const caseUrls = urls.filter((url) => url.startsWith('http://localhost:3102/ru/work/'));
 
@@ -75,7 +75,7 @@ describe('адреса Lighthouse по направлениям', () => {
     );
   });
 
-  it.each(['swiss', 'editorial'])('%s меряет только главную и кейс', (design) => {
+  it.each(['editorial'])('%s меряет только главную и кейс', (design) => {
     const urls = loadConfig(design).ci.collect.url;
 
     expect(urls).toHaveLength(2);

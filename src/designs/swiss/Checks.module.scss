@@ -1,0 +1,33 @@
+@use './shared' as s;
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14.5px;
+  line-height: 1.45;
+
+  @include s.wrap;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 10px;
+    height: var(--border-width-strong);
+    background: var(--ink);
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}

@@ -2,7 +2,7 @@ const design = process.env.LIGHTHOUSE_DESIGN ?? 'kinetic';
 
 const SERVICE_SLUGS = ['landing', 'business', 'mini-app', 'store', 'mvp', 'support'];
 
-const DESIGNS_WITH_SERVICE_PAGES = ['kinetic', 'terminal', 'pop'];
+const DESIGNS_WITH_SERVICE_PAGES = ['kinetic', 'terminal', 'pop', 'swiss'];
 
 const BASE_URL = 'http://localhost:3102';
 

@@ -52,3 +52,9 @@ export type DesignComponents = {
   briefThanks: ComponentType;
   servicePage: ComponentType<ServicePageProps>;
 };
+
+/** Срок шага услуги: ярлык мелко, число или диапазон крупно, как «День 1»; без числа ярлык идет целиком. */
+export type StepWhen = {
+  label: string;
+  value: string | null;
+};
