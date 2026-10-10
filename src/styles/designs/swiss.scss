@@ -1,10 +1,47 @@
 @font-face {
   font-family: 'Geologica Metric Fallback';
   src: local('Arial'), local('Liberation Sans'), local('Roboto'), local('Helvetica Neue');
-  ascent-override: 90.18%;
-  descent-override: 25.43%;
+  font-weight: 100 649;
+  ascent-override: 96.53%;
+  descent-override: 27.23%;
   line-gap-override: 0%;
-  size-adjust: 108.12%;
+  size-adjust: 101%;
+}
+
+@font-face {
+  font-family: 'Geologica Metric Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Roboto'), local('Helvetica Neue');
+  font-weight: 100 649;
+  ascent-override: 90.7%;
+  descent-override: 25.58%;
+  line-gap-override: 0%;
+  size-adjust: 107.5%;
+  unicode-range: U+0400-052F;
+}
+
+@font-face {
+  font-family: 'Geologica Metric Fallback';
+  src:
+    local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'),
+    local('Roboto Bold'), local('Helvetica Neue Bold');
+  font-weight: 650 1000;
+  ascent-override: 95.59%;
+  descent-override: 26.96%;
+  line-gap-override: 0%;
+  size-adjust: 102%;
+}
+
+@font-face {
+  font-family: 'Geologica Metric Fallback';
+  src:
+    local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'),
+    local('Roboto Bold'), local('Helvetica Neue Bold');
+  font-weight: 650 1000;
+  ascent-override: 91.98%;
+  descent-override: 25.94%;
+  line-gap-override: 0%;
+  size-adjust: 106%;
+  unicode-range: U+0400-052F;
 }
 
 [data-design='swiss'] {
